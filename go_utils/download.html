@@ -62,7 +62,7 @@
 <span class="kn">from</span> <span class="nn">go_utils.info</span> <span class="kn">import</span> <span class="o">*</span>
 
 
-<span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">,</span> <span class="n">country_names</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">results</span> <span class="o">=</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -75,16 +75,6 @@
     <span class="c1"># Drop the previously nested data column</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># Country Filters</span>
-    <span class="k">if</span> <span class="n">country_names</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">country_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">country_filt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">country_names</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">country_filt</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;countryName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())]</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s2">&quot;WARNING: There are no observations from your country(s) with your given parameters.&quot;</span>
-            <span class="p">)</span>
-
     <span class="c1"># Display the dataframe</span>
     <span class="k">return</span> <span class="n">df</span>
 
@@ -93,7 +83,6 @@
     <span class="n">protocol</span><span class="p">,</span>
     <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
     <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-    <span class="n">country_names</span><span class="o">=</span><span class="p">[],</span>
     <span class="n">latlon_box</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min_lat&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;max_lat&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;min_lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;max_lon&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Utility function for interfacing with the GLOBE API.</span>
@@ -107,8 +96,6 @@
 <span class="sd">                 The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
 <span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
 <span class="sd">               The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    country_names : list of str, default= []</span>
-<span class="sd">                    The desired countries of the dataset. If left empty, the dataset is not filtered by countries. Note that this may not be accurate due to entries in the GLOBE Observer Dataset that lack country names.</span>
 <span class="sd">    latlon_box : dict of {str, double}, optional</span>
 <span class="sd">                 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
 
@@ -143,7 +130,7 @@
             <span class="s2">&quot;Failed to get data from the API. Double check your specified settings to make sure they are valid.&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="n">country_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </pre></div>
 
         </details>
@@ -154,12 +141,12 @@
 
         
             <span class="def">def</span>
-            <span class="name">parse_api_data</span><span class="signature">(response_json, country_names)</span>:
+            <span class="name">parse_api_data</span><span class="signature">(response_json)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">,</span> <span class="n">country_names</span><span class="p">):</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">results</span> <span class="o">=</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -171,16 +158,6 @@
 
     <span class="c1"># Drop the previously nested data column</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># Country Filters</span>
-    <span class="k">if</span> <span class="n">country_names</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">country_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">country_filt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">country_names</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">country_filt</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;countryName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())]</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s2">&quot;WARNING: There are no observations from your country(s) with your given parameters.&quot;</span>
-            <span class="p">)</span>
 
     <span class="c1"># Display the dataframe</span>
     <span class="k">return</span> <span class="n">df</span>
@@ -200,7 +177,6 @@
     protocol,
     start_date=&#39;2017-05-31&#39;,
     end_date=&#39;2021-05-12&#39;,
-    country_names=[],
     latlon_box={&#39;min_lat&#39;: -90, &#39;max_lat&#39;: 90, &#39;min_lon&#39;: -180, &#39;max_lon&#39;: 180}
 )</span>:
     </div>
@@ -211,7 +187,6 @@
     <span class="n">protocol</span><span class="p">,</span>
     <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
     <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-    <span class="n">country_names</span><span class="o">=</span><span class="p">[],</span>
     <span class="n">latlon_box</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min_lat&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;max_lat&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;min_lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;max_lon&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Utility function for interfacing with the GLOBE API.</span>
@@ -225,8 +200,6 @@
 <span class="sd">                 The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
 <span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
 <span class="sd">               The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    country_names : list of str, default= []</span>
-<span class="sd">                    The desired countries of the dataset. If left empty, the dataset is not filtered by countries. Note that this may not be accurate due to entries in the GLOBE Observer Dataset that lack country names.</span>
 <span class="sd">    latlon_box : dict of {str, double}, optional</span>
 <span class="sd">                 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
 
@@ -261,7 +234,7 @@
             <span class="s2">&quot;Failed to get data from the API. Double check your specified settings to make sure they are valid.&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="n">country_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </pre></div>
 
         </details>
@@ -278,8 +251,6 @@ The desired GLOBE Observer Protocol. Protocols for the App protocols include: <c
 The desired start date of the dataset in the format of (YYYY-MM-DD).</li>
 <li><strong>end_date</strong> (str, default= today's date in YYYY-MM-DD form.):
 The desired end date of the dataset in the format of (YYYY-MM-DD).</li>
-<li><strong>country_names</strong> (list of str, default= []):
-The desired countries of the dataset. If left empty, the dataset is not filtered by countries. Note that this may not be accurate due to entries in the GLOBE Observer Dataset that lack country names.</li>
 <li><strong>latlon_box</strong> (dict of {str, double}, optional):
 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: "min_lat", "min_lon", "max_lat", "max_lon". The default value specifies all latitude and longitude coordinates.</li>
 </ul>
