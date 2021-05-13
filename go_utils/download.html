@@ -55,11 +55,10 @@
                         <details>
             <summary>View Source</summary>
             <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">go_utils.info</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">go_utils.info</span> <span class="kn">import</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span>
 
 
 <span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">):</span>
@@ -176,7 +175,7 @@
             <span class="name">get_api_data</span><span class="signature">(
     protocol,
     start_date=&#39;2017-05-31&#39;,
-    end_date=&#39;2021-05-12&#39;,
+    end_date=&#39;2021-05-13&#39;,
     latlon_box={&#39;min_lat&#39;: -90, &#39;max_lat&#39;: 90, &#39;min_lon&#39;: -180, &#39;max_lon&#39;: 180}
 )</span>:
     </div>
