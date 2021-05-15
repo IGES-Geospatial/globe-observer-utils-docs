@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="pdoc 7.0.0" />
-    <title>go_utils.download API documentation</title>
+    <title>go_utils.cleanup API documentation</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%2244.5%202.5%2015%2015%22%3E%3Cpath%20d%3D%22M49.351%2021.041c-.233-.721-.546-2.408-.772-4.076-.042-.09-.067-.187-.046-.288-.166-1.347-.277-2.625-.241-3.351-1.378-1.008-2.271-2.586-2.271-4.362%200-.976.272-1.935.788-2.774.057-.094.122-.18.184-.268-.033-.167-.052-.339-.052-.516%200-1.477%201.202-2.679%202.679-2.679.791%200%201.496.352%201.987.9a6.3%206.3%200%200%201%201.001.029c.492-.564%201.207-.929%202.012-.929%201.477%200%202.679%201.202%202.679%202.679a2.65%202.65%200%200%201-.269%201.148c.383.747.595%201.572.595%202.41%200%202.311-1.507%204.29-3.635%205.107.037.699.147%202.27.423%203.294l.137.461c.156%202.136-4.612%205.166-5.199%203.215zm.127-4.919a4.78%204.78%200%200%200%20.775-.584c-.172-.115-.505-.254-.88-.378zm.331%202.302l.828-.502c-.202-.143-.576-.328-.984-.49zm.45%202.157l.701-.403c-.214-.115-.536-.249-.891-.376l.19.779zM49.13%204.141c0%20.152.123.276.276.276s.275-.124.275-.276-.123-.276-.276-.276-.275.124-.275.276zm.735-.389a1.15%201.15%200%200%201%20.314.783%201.16%201.16%200%200%201-1.162%201.162c-.457%200-.842-.27-1.032-.653-.026.117-.042.238-.042.362a1.68%201.68%200%200%200%201.679%201.679%201.68%201.68%200%200%200%201.679-1.679c0-.843-.626-1.535-1.436-1.654zm3.076%201.654a1.68%201.68%200%200%200%201.679%201.679%201.68%201.68%200%200%200%201.679-1.679c0-.037-.009-.072-.011-.109-.21.3-.541.508-.935.508a1.16%201.16%200%200%201-1.162-1.162%201.14%201.14%200%200%201%20.474-.912c-.015%200-.03-.005-.045-.005-.926.001-1.679.754-1.679%201.68zm1.861-1.265c0%20.152.123.276.276.276s.275-.124.275-.276-.123-.276-.276-.276-.275.124-.275.276zm1.823%204.823c0-.52-.103-1.035-.288-1.52-.466.394-1.06.64-1.717.64-1.144%200-2.116-.725-2.499-1.738-.383%201.012-1.355%201.738-2.499%201.738-.867%200-1.631-.421-2.121-1.062-.307.605-.478%201.267-.478%201.942%200%202.486%202.153%204.51%204.801%204.51s4.801-2.023%204.801-4.51zm-3.032%209.156l-.146-.492c-.276-1.02-.395-2.457-.444-3.268a6.11%206.11%200%200%201-1.18.115%206.01%206.01%200%200%201-2.536-.562l.006.175c.802.215%201.848.612%202.021%201.25.079.295-.021.601-.274.837l-.598.501c.667.304%201.243.698%201.311%201.179.02.144.022.507-.393.787l-.564.365c1.285.521%201.361.96%201.381%201.126.018.142.011.496-.427.746l-.854.489c.064-1.19%201.985-2.585%202.697-3.248zM49.34%209.925c0-.667%201-.667%201%200%200%20.653.818%201.205%201.787%201.205s1.787-.552%201.787-1.205c0-.667%201-.667%201%200%200%201.216-1.25%202.205-2.787%202.205s-2.787-.989-2.787-2.205zm-.887-7.633c-.093.077-.205.114-.317.114a.5.5%200%200%201-.318-.886L49.183.397a.5.5%200%200%201%20.703.068.5.5%200%200%201-.069.703zm7.661-.065c-.086%200-.173-.022-.253-.068l-1.523-.893c-.575-.337-.069-1.2.506-.863l1.523.892a.5.5%200%200%201%20.179.685c-.094.158-.261.247-.432.247z%22%20fill%3D%22%233bb300%22/%3E%3C/svg%3E"/>
 
     <script>
@@ -39,15 +39,43 @@
                            pattern=".+" required>
 
 
+                    <h2>Contents</h2>
+                    <ul>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#methods">Methods</a>
+  <ul>
+    <li><a href="#remove-redundanthomogenous-column">Remove Redundant/Homogenous Column:</a></li>
+    <li><a href="#rename-columns">Rename columns:</a>
+    <ul>
+      <li><a href="#differentiating-between-mgrs-and-gps-columns">Differentiating between MGRS and GPS Columns:</a></li>
+      <li><a href="#protocol-abbreviation">Protocol Abbreviation:</a></li>
+    </ul></li>
+    <li><a href="#standardize-no-data-values">Standardize no-data values:</a></li>
+    <li><a href="#round-appropriate-columns">Round Appropriate Columns</a></li>
+  </ul></li>
+</ul>
+
 
 
                     <h2>API Documentation</h2>
                         <ul class="memberlist">
             <li>
-                    <a class="function" href="#parse_api_data">parse_api_data</a>
+                    <a class="function" href="#remove_homogenous_cols">remove_homogenous_cols</a>
             </li>
             <li>
-                    <a class="function" href="#get_api_data">get_api_data</a>
+                    <a class="function" href="#replace_column_prefix">replace_column_prefix</a>
+            </li>
+            <li>
+                    <a class="function" href="#find_column">find_column</a>
+            </li>
+            <li>
+                    <a class="function" href="#rename_latlon_cols">rename_latlon_cols</a>
+            </li>
+            <li>
+                    <a class="function" href="#round_cols">round_cols</a>
+            </li>
+            <li>
+                    <a class="function" href="#standardize_null_vals">standardize_null_vals</a>
             </li>
     </ul>
 
@@ -62,215 +90,623 @@
     <main class="pdoc">
             <section>
                     <h1 class="modulename">
-<a href="./../go_utils.html">go_utils</a><wbr>.download    </h1>
+<a href="./../go_utils.html">go_utils</a><wbr>.cleanup    </h1>
 
-                
+                        <div class="docstring"><h1 id="overview">Overview</h1>
+
+<p>This submodule contains several methods to assist with data cleanup.
+The following sections discuss some of the decisions behind these methods and their part of a larger data cleanup pipeline.</p>
+
+<h1 id="methods">Methods</h1>
+
+<h2 id="remove-redundanthomogenous-column">Remove Redundant/Homogenous Column:</h2>
+
+<p><a href="#remove_homogenous_cols">This method</a> indentifies and removes columns where all values were the same. If the logging level is set to INFO, the method will also print the names of the dropped columns and their respective singular value as a Python dictionary. 
+For the raw mosquito habitat mapper data, the following were dropped: </p>
+
+<ul>
+<li>{'protocol': 'mosquito_habitat_mapper'} </li>
+<li>{'ExtraData': None} </li>
+<li>{'MosquitoEggCount': None} </li>
+<li>{'DataSource': 'GLOBE Observer App'}</li>
+</ul>
+
+<p>For raw landcover data, the following were dropped:</p>
+
+<ul>
+<li>{'protocol': 'land_covers'}</li>
+</ul>
+
+<h2 id="rename-columns">Rename columns:</h2>
+
+<h3 id="differentiating-between-mgrs-and-gps-columns">Differentiating between MGRS and GPS Columns:</h3>
+
+<p>The GLOBE API data for <code>MosquitoHabitatMapper</code> and <code>LandCovers</code> report each observation’s Military Grid Reference System (MGRS) Coordinates in the <code>latitude</code> and <code>longitude</code> fields. The GPS Coordinates are stored in the <code>MeasurementLatitude</code> and <code>MeasurementLongitude</code> fields. 
+To avoid confusion between these measuring systems, <a href="#rename_latlon_cols">this method</a> renames <code>latitude</code> and <code>longitude</code> to <code>MGRSLatitude</code> and <code>MGRSLongitude</code>, respectively, and <code>MeasurementLatitude</code> and <code>MeasurementLongitude</code> to <code>Latitude</code> and <code>Longitude</code>, respectively. Now, the official <code>Latitude</code> and <code>Longitude</code> columns are more intuitively named.</p>
+
+<h3 id="protocol-abbreviation">Protocol Abbreviation:</h3>
+
+<p>To better support future cross-protocol analysis and data enrichment, <a href="#replace_column_prefix">this method</a> following naming scheme for all column names: <code>protocolAbbreviation_columnName</code>, where <code>protocolAbbreviation</code> was the abbreviation for the protocol (<code>mhm</code> for mosquito habitat mapper and <code>lc</code> for land cover) and <code>columnName</code> was the original name of the column. For example, the mosquito habitat mapper “MGRSLongitude” column was renamed “mhm_MGRSLongitude” and the corresponding land cover column was renamed “lc_MGRSLongitude”.</p>
+
+<p>Do note that if you would like to use the previously mentioned <code>mhm</code> and <code>lc</code> naming scheme for you data, the <code><a href="mhm.html">go_utils.mhm</a></code> and <code><a href="lc.html">go_utils.lc</a></code> submodules each have a method called <code>cleanup_column_prefix</code> which uses the previously mentioned naming scheme as opposed to the <code><a href="#replace_column_prefix">replace_column_prefix</a></code> method which requires that you specify the current prefix and desired prefix.</p>
+
+<h2 id="standardize-no-data-values">Standardize no-data values:</h2>
+
+<p>The GLOBE API CSV’s lacked standardization in indicating No Data. Indicators ranged from Python's <code>None</code>, to <code>“null”</code>, to an empty cell, to <code>NaN</code> (<code>np.nan</code>). To improve the computational efficiency in future mathematical algorithms on the GLOBE datasets, <a href="#standardize_null_values">this method</a> converts all No Data Indicators to np.nan (Python NumPy’s version of No-Data as a float). Do note that later in Round Appropriate Columns, all numerical extraneous values are converted from np.nan to -9999.  Thus, Users will receive the pre-processed GLOBE API Mosquito Habitat Mapper and Land Cover Data in accordance with the standards described by Cook et al (2018). </p>
+
+<h2 id="round-appropriate-columns">Round Appropriate Columns</h2>
+
+<p><a href="#round_cols">This method</a> does the following:</p>
+
+<ol>
+<li>Identifies all numerical columns (e.g. <code>float64</code>, <code>float</code>, <code>int</code>, <code>int64</code>).</li>
+<li>Rounds Latitudes and Longitude Columns to 5 places. To reduce data density, all latitude and longitude values were rounded to 5 decimal places. This corresponds to about a meter of accuracy. Furthermore, any larger number of decimal places consume unnecessary amounts of storage as the GLOBE Observer app cannot attain such precision.</li>
+<li>Converts other Numerical Data to Integers. To improve the datasets’ memory and performance, non latitude and longitude numerical values were converted to integers for the remaining columns, including <code>Id</code>, <code>MeasurementElevation</code>, and <code>elevation</code> columns.  This is appropriate since ids are always discrete values. <code>MeasurementElevation</code> and <code>elevation</code> are imprecise estimates from 3rd party sources, rendering additional precision an unnecessary waste of memory. However, by converting these values to integers, we could no longer use np.nan, a float, to denote extraneous/empty values. Thus, for integer columns, we used -9999 to denote extraneous/empty values.</li>
+</ol>
+
+<p><strong>Note</strong>: Larvae Counts were also converted to integers and Land Classification Column percentages were also converted to integers, reducing our data density. This logic is further discussed in <a href="mhm.html#larvae_to_num">go_utils.mhm.larvae_to_num</a> for mosquito habitat mapper and <a href="lc.html#unpack_classifications">go_utils.lc.unpack_classifications</a></p>
+</div>
+
                         <details>
             <summary>View Source</summary>
             <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">go_utils.info</span> <span class="kn">import</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span>
+<span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2"># Overview</span>
+<span class="s2">This submodule contains several methods to assist with data cleanup.</span>
+<span class="s2">The following sections discuss some of the decisions behind these methods and their part of a larger data cleanup pipeline.</span>
+
+<span class="s2"># Methods</span>
+
+<span class="s2">## Remove Redundant/Homogenous Column:</span>
+<span class="s2">[This method](#remove_homogenous_cols) indentifies and removes columns where all values were the same. If the logging level is set to INFO, the method will also print the names of the dropped columns and their respective singular value as a Python dictionary. </span>
+<span class="s2">For the raw mosquito habitat mapper data, the following were dropped: </span>
+<span class="s2">- {&#39;protocol&#39;: &#39;mosquito_habitat_mapper&#39;} </span>
+<span class="s2">- {&#39;ExtraData&#39;: None} </span>
+<span class="s2">- {&#39;MosquitoEggCount&#39;: None} </span>
+<span class="s2">- {&#39;DataSource&#39;: &#39;GLOBE Observer App&#39;}</span>
+
+<span class="s2">For raw landcover data, the following were dropped:</span>
+<span class="s2">- {&#39;protocol&#39;: &#39;land_covers&#39;}</span>
+
+<span class="s2">## Rename columns:</span>
+
+<span class="s2">### Differentiating between MGRS and GPS Columns: </span>
+<span class="s2">The GLOBE API data for `MosquitoHabitatMapper` and `LandCovers` report each observation’s Military Grid Reference System (MGRS) Coordinates in the `latitude` and `longitude` fields. The GPS Coordinates are stored in the `MeasurementLatitude` and `MeasurementLongitude` fields. </span>
+<span class="s2">To avoid confusion between these measuring systems, [this method](#rename_latlon_cols) renames `latitude` and `longitude` to `MGRSLatitude` and `MGRSLongitude`, respectively, and `MeasurementLatitude` and `MeasurementLongitude` to `Latitude` and `Longitude`, respectively. Now, the official `Latitude` and `Longitude` columns are more intuitively named.</span>
+
+<span class="s2">### Protocol Abbreviation:</span>
+<span class="s2">To better support future cross-protocol analysis and data enrichment, [this method](#replace_column_prefix) following naming scheme for all column names: `protocolAbbreviation_columnName`, where `protocolAbbreviation` was the abbreviation for the protocol (`mhm` for mosquito habitat mapper and `lc` for land cover) and `columnName` was the original name of the column. For example, the mosquito habitat mapper “MGRSLongitude” column was renamed “mhm_MGRSLongitude” and the corresponding land cover column was renamed “lc_MGRSLongitude”.</span>
+
+<span class="s2">Do note that if you would like to use the previously mentioned `mhm` and `lc` naming scheme for you data, the `go_utils.mhm` and `go_utils.lc` submodules each have a method called `cleanup_column_prefix` which uses the previously mentioned naming scheme as opposed to the `replace_column_prefix` method which requires that you specify the current prefix and desired prefix.</span>
+
+<span class="s2">## Standardize no-data values:</span>
+<span class="s2">The GLOBE API CSV’s lacked standardization in indicating No Data. Indicators ranged from Python&#39;s `None`, to `“null”`, to an empty cell, to `NaN` (`np.nan`). To improve the computational efficiency in future mathematical algorithms on the GLOBE datasets, [this method](#standardize_null_values) converts all No Data Indicators to np.nan (Python NumPy’s version of No-Data as a float). Do note that later in Round Appropriate Columns, all numerical extraneous values are converted from np.nan to -9999.  Thus, Users will receive the pre-processed GLOBE API Mosquito Habitat Mapper and Land Cover Data in accordance with the standards described by Cook et al (2018). </span>
+
+<span class="s2">## Round Appropriate Columns</span>
+<span class="s2">[This method](#round_cols) does the following:</span>
+<span class="s2">1. Identifies all numerical columns (e.g. `float64`, `float`, `int`, `int64`).</span>
+<span class="s2">2. Rounds Latitudes and Longitude Columns to 5 places. To reduce data density, all latitude and longitude values were rounded to 5 decimal places. This corresponds to about a meter of accuracy. Furthermore, any larger number of decimal places consume unnecessary amounts of storage as the GLOBE Observer app cannot attain such precision.</span>
+<span class="s2">3. Converts other Numerical Data to Integers. To improve the datasets’ memory and performance, non latitude and longitude numerical values were converted to integers for the remaining columns, including `Id`, `MeasurementElevation`, and `elevation` columns.  This is appropriate since ids are always discrete values. `MeasurementElevation` and `elevation` are imprecise estimates from 3rd party sources, rendering additional precision an unnecessary waste of memory. However, by converting these values to integers, we could no longer use np.nan, a float, to denote extraneous/empty values. Thus, for integer columns, we used -9999 to denote extraneous/empty values.</span>
+
+<span class="s2">**Note**: Larvae Counts were also converted to integers and Land Classification Column percentages were also converted to integers, reducing our data density. This logic is further discussed in go_utils.mhm.larvae_to_num for mosquito habitat mapper and go_utils.lc.unpack_classifications</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">remove_homogenous_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes columns froma DataFrame if they contain only 1 unique value. This method will change the DataFrame that is passed.</span>
 
-        <span class="c1"># Expand the &#39;data&#39; column by listing the contents and passing as a new dataframe</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Data Download Failed. The GLOBE API is most likely down.&quot;</span><span class="p">)</span>
+<span class="sd">    For example, if this code is run:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import remove_homogenous_cols</span>
+<span class="sd">    remove_homogenous_cols(df)</span>
+<span class="sd">    ```</span>
 
-    <span class="c1"># Drop the previously nested data column</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="sd">    Then the original `df` variable that was passed is now updated with these dropped columns.</span>
 
-    <span class="c1"># Display the dataframe</span>
-    <span class="k">return</span> <span class="n">df</span>
-
-
-<span class="k">def</span> <span class="nf">get_api_data</span><span class="p">(</span>
-    <span class="n">protocol</span><span class="p">,</span>
-    <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
-    <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-    <span class="n">latlon_box</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min_lat&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;max_lat&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;min_lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;max_lon&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Utility function for interfacing with the GLOBE API.</span>
-<span class="sd">    More information about the API can be viewed [here](https://www.globe.gov/es/globe-data/globe-api).</span>
+<span class="sd">    If you would like to see the columns that are dropped, setting the logging level to info will allow for that to happen.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    protocol : str</span>
-<span class="sd">               The desired GLOBE Observer Protocol. Protocols for the App protocols include: `land_covers` (Landcover), `mosquito_habitat_mapper` (Mosquito Habitat Mapper), `sky_conditions` (Clouds), `tree_heights` (Trees).</span>
-<span class="sd">    start_date : str, default= 2017-05-31</span>
-<span class="sd">                 The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
-<span class="sd">               The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    latlon_box : dict of {str, double}, optional</span>
-<span class="sd">                 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    pd.DataFrame</span>
-<span class="sd">      A DataFrame containing Raw GLOBE Observer Data of the specified parameters</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame that will be modified</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">valid_lat_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lat&quot;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">])</span>
-        <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">90</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dropped: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">replace_column_prefix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">replacement_text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replaces the protocol prefix (e.g. mosquito_habitat_mapper/mosquitohabitatmapper) for the column names with another prefix in the format of `newPrefix_columnName`.</span>
+
+<span class="sd">    If you are interested in replacing the prefixes for the raw mosquito habitat mapper and landcover datasets, use the go_utils.lc.cleanup_column_prefix and go_utils.mhm.cleanup_column_prefix methods.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame you would like updated</span>
+<span class="sd">    protocol : str</span>
+<span class="sd">        A string representing the protocol prefix.</span>
+<span class="sd">    replacement_text : str</span>
+<span class="sd">        A string representing the desired prefix for the column name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">replacement_text</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">column</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+    <span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">find_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Finds the first column that contains a certain keyword. Mainly intended to be a utility function for some of the other methods.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame containing the columns that need to be searched.</span>
+<span class="sd">    keyword: str</span>
+<span class="sd">        The keyword that needs to be present in the desired column.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">column</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">rename_latlon_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Renames the latitude and longitude columns of **raw** GLOBE Observer Data to make the naming intuitive.</span>
+
+<span class="sd">    [This](#differentiating-between-mgrs-and-gps-columns) explains the motivation behind the method.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import rename_latlon_cols</span>
+<span class="sd">    rename_latlon_cols(df)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame whose columns require renaming.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">latitude_col</span> <span class="o">=</span> <span class="n">find_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;MeasurementLatitude&quot;</span><span class="p">)</span>
+    <span class="n">longitude_col</span> <span class="o">=</span> <span class="n">find_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;MeasurementLongitude&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="n">latitude_col</span><span class="p">:</span> <span class="s2">&quot;Latitude&quot;</span><span class="p">,</span>
+            <span class="n">longitude_col</span><span class="p">:</span> <span class="s2">&quot;Longitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="s2">&quot;MGRSLatitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="s2">&quot;MGRSLongitude&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">valid_lon_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lon&quot;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">])</span>
-        <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">180</span>
+
+
+<span class="k">def</span> <span class="nf">round_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This rounds columns in the DataFrame. More specifically, latitude and longitude data is rounded to 5 decimal places, other fields are rounded to integers, and null values (for the integer columns) are set to -9999.</span>
+
+<span class="sd">    See [here](#round-appropriate-columns) for more information.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import round_cols</span>
+<span class="sd">    round_cols(df)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame that requires rounding.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Identifies all the numerical cols</span>
+    <span class="n">number_cols</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;float64&quot;</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;int&quot;</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;int64&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Rounds cols appropriately</span>
+    <span class="n">column_round</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">digits</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">digits</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">number_cols</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;latitude&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;longitude&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rounded to 5 decimals: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">column_round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Converted to integer: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">standardize_null_vals</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">null_val</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method standardizes the null values of **raw** GLOBE Observer Data.</span>
+
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import standardize_null_vals</span>
+<span class="sd">    standardize_null_vals(df)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame that needs null value standardization</span>
+<span class="sd">    null_val : obj, default=np.nan</span>
+<span class="sd">        The value that all null values should be set to</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Replace Null Values with null_val</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">null_val</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Replace any text null values</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;null&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="s2">&quot;NaN&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="kc">None</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">valid_lat_checks</span> <span class="ow">and</span> <span class="n">valid_lon_checks</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/lat/lon/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;minlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;minlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;You did not enter any valid/specific coordinates, so we gave you all the observations for your protocol, date_range, and any countryNames you may have specified.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
-
-    <span class="c1"># Downloads data from the GLOBE API</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="s2">&quot;Failed to get data from the API. Double check your specified settings to make sure they are valid.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </pre></div>
 
         </details>
 
             </section>
-                <section id="parse_api_data">
-                            <div class="attr function"><a class="headerlink" href="#parse_api_data">#&nbsp;&nbsp</a>
+                <section id="remove_homogenous_cols">
+                            <div class="attr function"><a class="headerlink" href="#remove_homogenous_cols">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">parse_api_data</span><span class="signature">(response_json)</span>:
+            <span class="name">remove_homogenous_cols</span><span class="signature">(df)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">remove_homogenous_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes columns froma DataFrame if they contain only 1 unique value. This method will change the DataFrame that is passed.</span>
 
-        <span class="c1"># Expand the &#39;data&#39; column by listing the contents and passing as a new dataframe</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Data Download Failed. The GLOBE API is most likely down.&quot;</span><span class="p">)</span>
+<span class="sd">    For example, if this code is run:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import remove_homogenous_cols</span>
+<span class="sd">    remove_homogenous_cols(df)</span>
+<span class="sd">    ```</span>
 
-    <span class="c1"># Drop the previously nested data column</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="sd">    Then the original `df` variable that was passed is now updated with these dropped columns.</span>
 
-    <span class="c1"># Display the dataframe</span>
-    <span class="k">return</span> <span class="n">df</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
-                <section id="get_api_data">
-                            <div class="attr function"><a class="headerlink" href="#get_api_data">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">get_api_data</span><span class="signature">(
-    protocol,
-    start_date=&#39;2017-05-31&#39;,
-    end_date=&#39;2021-05-15&#39;,
-    latlon_box={&#39;min_lat&#39;: -90, &#39;max_lat&#39;: 90, &#39;min_lon&#39;: -180, &#39;max_lon&#39;: 180}
-)</span>:
-    </div>
-
-                <details>
-            <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_api_data</span><span class="p">(</span>
-    <span class="n">protocol</span><span class="p">,</span>
-    <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
-    <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-    <span class="n">latlon_box</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min_lat&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;max_lat&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;min_lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;max_lon&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Utility function for interfacing with the GLOBE API.</span>
-<span class="sd">    More information about the API can be viewed [here](https://www.globe.gov/es/globe-data/globe-api).</span>
+<span class="sd">    If you would like to see the columns that are dropped, setting the logging level to info will allow for that to happen.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    protocol : str</span>
-<span class="sd">               The desired GLOBE Observer Protocol. Protocols for the App protocols include: `land_covers` (Landcover), `mosquito_habitat_mapper` (Mosquito Habitat Mapper), `sky_conditions` (Clouds), `tree_heights` (Trees).</span>
-<span class="sd">    start_date : str, default= 2017-05-31</span>
-<span class="sd">                 The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
-<span class="sd">               The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    latlon_box : dict of {str, double}, optional</span>
-<span class="sd">                 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    pd.DataFrame</span>
-<span class="sd">      A DataFrame containing Raw GLOBE Observer Data of the specified parameters</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame that will be modified</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">valid_lat_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lat&quot;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">])</span>
-        <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">90</span>
-    <span class="p">)</span>
-    <span class="n">valid_lon_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lon&quot;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">])</span>
-        <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">180</span>
-    <span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">valid_lat_checks</span> <span class="ow">and</span> <span class="n">valid_lon_checks</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/lat/lon/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;minlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;minlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;You did not enter any valid/specific coordinates, so we gave you all the observations for your protocol, date_range, and any countryNames you may have specified.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
-
-    <span class="c1"># Downloads data from the GLOBE API</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="s2">&quot;Failed to get data from the API. Double check your specified settings to make sure they are valid.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dropped: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
         </details>
 
-            <div class="docstring"><p>Utility function for interfacing with the GLOBE API.
-More information about the API can be viewed <a href="https://www.globe.gov/es/globe-data/globe-api">here</a>.</p>
+            <div class="docstring"><p>Removes columns froma DataFrame if they contain only 1 unique value. This method will change the DataFrame that is passed.</p>
+
+<p>For example, if this code is run:</p>
+
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn"><a href="">go_utils.cleanup</a></span> <span class="kn">import</span> <span class="n">remove_homogenous_cols</span>
+<span class="n">remove_homogenous_cols</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Then the original <code>df</code> variable that was passed is now updated with these dropped columns.</p>
+
+<p>If you would like to see the columns that are dropped, setting the logging level to info will allow for that to happen.</p>
 
 <h6 id="parameters">Parameters</h6>
 
 <ul>
-<li><strong>protocol</strong> (str):
-The desired GLOBE Observer Protocol. Protocols for the App protocols include: <code>land_covers</code> (Landcover), <code>mosquito_habitat_mapper</code> (Mosquito Habitat Mapper), <code>sky_conditions</code> (Clouds), <code>tree_heights</code> (Trees).</li>
-<li><strong>start_date</strong> (str, default= 2017-05-31):
-The desired start date of the dataset in the format of (YYYY-MM-DD).</li>
-<li><strong>end_date</strong> (str, default= today's date in YYYY-MM-DD form.):
-The desired end date of the dataset in the format of (YYYY-MM-DD).</li>
-<li><strong>latlon_box</strong> (dict of {str, double}, optional):
-The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: "min_lat", "min_lon", "max_lat", "max_lon". The default value specifies all latitude and longitude coordinates.</li>
+<li><strong>df</strong> (pd.DataFrame):
+The DataFrame that will be modified</li>
 </ul>
+</div>
 
-<h6 id="returns">Returns</h6>
+
+                </section>
+                <section id="replace_column_prefix">
+                            <div class="attr function"><a class="headerlink" href="#replace_column_prefix">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">replace_column_prefix</span><span class="signature">(df, protocol, replacement_text)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">replace_column_prefix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">replacement_text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replaces the protocol prefix (e.g. mosquito_habitat_mapper/mosquitohabitatmapper) for the column names with another prefix in the format of `newPrefix_columnName`.</span>
+
+<span class="sd">    If you are interested in replacing the prefixes for the raw mosquito habitat mapper and landcover datasets, use the go_utils.lc.cleanup_column_prefix and go_utils.mhm.cleanup_column_prefix methods.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame you would like updated</span>
+<span class="sd">    protocol : str</span>
+<span class="sd">        A string representing the protocol prefix.</span>
+<span class="sd">    replacement_text : str</span>
+<span class="sd">        A string representing the desired prefix for the column name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">replacement_text</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">column</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+    <span class="p">]</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Replaces the protocol prefix (e.g. mosquito_habitat_mapper/mosquitohabitatmapper) for the column names with another prefix in the format of <code>newPrefix_columnName</code>.</p>
+
+<p>If you are interested in replacing the prefixes for the raw mosquito habitat mapper and landcover datasets, use the <a href="lc.html#cleanup_column_prefix">go_utils.lc.cleanup_column_prefix</a> and <a href="mhm.html#cleanup_column_prefix">go_utils.mhm.cleanup_column_prefix</a> methods.</p>
+
+<h6 id="parameters">Parameters</h6>
 
 <ul>
-<li><strong>pd.DataFrame</strong>: A DataFrame containing Raw GLOBE Observer Data of the specified parameters</li>
+<li><strong>df</strong> (pd.DataFrame):
+The DataFrame you would like updated</li>
+<li><strong>protocol</strong> (str):
+A string representing the protocol prefix.</li>
+<li><strong>replacement_text</strong> (str):
+A string representing the desired prefix for the column name.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="find_column">
+                            <div class="attr function"><a class="headerlink" href="#find_column">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">find_column</span><span class="signature">(df, keyword)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">find_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Finds the first column that contains a certain keyword. Mainly intended to be a utility function for some of the other methods.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame containing the columns that need to be searched.</span>
+<span class="sd">    keyword: str</span>
+<span class="sd">        The keyword that needs to be present in the desired column.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">column</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Finds the first column that contains a certain keyword. Mainly intended to be a utility function for some of the other methods.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>df</strong> (pd.DataFrame):
+The DataFrame containing the columns that need to be searched.</li>
+<li><strong>keyword</strong> (str):
+The keyword that needs to be present in the desired column.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="rename_latlon_cols">
+                            <div class="attr function"><a class="headerlink" href="#rename_latlon_cols">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">rename_latlon_cols</span><span class="signature">(df)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">rename_latlon_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Renames the latitude and longitude columns of **raw** GLOBE Observer Data to make the naming intuitive.</span>
+
+<span class="sd">    [This](#differentiating-between-mgrs-and-gps-columns) explains the motivation behind the method.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import rename_latlon_cols</span>
+<span class="sd">    rename_latlon_cols(df)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame whose columns require renaming.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">latitude_col</span> <span class="o">=</span> <span class="n">find_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;MeasurementLatitude&quot;</span><span class="p">)</span>
+    <span class="n">longitude_col</span> <span class="o">=</span> <span class="n">find_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;MeasurementLongitude&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="n">latitude_col</span><span class="p">:</span> <span class="s2">&quot;Latitude&quot;</span><span class="p">,</span>
+            <span class="n">longitude_col</span><span class="p">:</span> <span class="s2">&quot;Longitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="s2">&quot;MGRSLatitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="s2">&quot;MGRSLongitude&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>Renames the latitude and longitude columns of <strong>raw</strong> GLOBE Observer Data to make the naming intuitive.</p>
+
+<p><a href="#differentiating-between-mgrs-and-gps-columns">This</a> explains the motivation behind the method.</p>
+
+<p>Example usage:</p>
+
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn"><a href="">go_utils.cleanup</a></span> <span class="kn">import</span> <span class="n">rename_latlon_cols</span>
+<span class="n">rename_latlon_cols</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>df</strong> (pd.DataFrame):
+The DataFrame whose columns require renaming.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="round_cols">
+                            <div class="attr function"><a class="headerlink" href="#round_cols">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">round_cols</span><span class="signature">(df)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">round_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This rounds columns in the DataFrame. More specifically, latitude and longitude data is rounded to 5 decimal places, other fields are rounded to integers, and null values (for the integer columns) are set to -9999.</span>
+
+<span class="sd">    See [here](#round-appropriate-columns) for more information.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import round_cols</span>
+<span class="sd">    round_cols(df)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame that requires rounding.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Identifies all the numerical cols</span>
+    <span class="n">number_cols</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;float64&quot;</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;int&quot;</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;int64&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Rounds cols appropriately</span>
+    <span class="n">column_round</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">digits</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">digits</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">number_cols</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;latitude&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;longitude&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rounded to 5 decimals: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">column_round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Converted to integer: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>This rounds columns in the DataFrame. More specifically, latitude and longitude data is rounded to 5 decimal places, other fields are rounded to integers, and null values (for the integer columns) are set to -9999.</p>
+
+<p>See <a href="#round-appropriate-columns">here</a> for more information.</p>
+
+<p>Example usage:</p>
+
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn"><a href="">go_utils.cleanup</a></span> <span class="kn">import</span> <span class="n">round_cols</span>
+<span class="n">round_cols</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>df</strong> (pd.DataFrame):
+The DataFrame that requires rounding.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="standardize_null_vals">
+                            <div class="attr function"><a class="headerlink" href="#standardize_null_vals">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">standardize_null_vals</span><span class="signature">(df, null_val=nan)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">standardize_null_vals</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">null_val</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method standardizes the null values of **raw** GLOBE Observer Data.</span>
+
+<span class="sd">    ```python</span>
+<span class="sd">    from go_utils.cleanup import standardize_null_vals</span>
+<span class="sd">    standardize_null_vals(df)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The DataFrame that needs null value standardization</span>
+<span class="sd">    null_val : obj, default=np.nan</span>
+<span class="sd">        The value that all null values should be set to</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Replace Null Values with null_val</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">null_val</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Replace any text null values</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;null&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="s2">&quot;NaN&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+            <span class="kc">None</span><span class="p">:</span> <span class="n">null_val</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+
+        </details>
+
+            <div class="docstring"><p>This method standardizes the null values of <strong>raw</strong> GLOBE Observer Data.</p>
+
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn"><a href="">go_utils.cleanup</a></span> <span class="kn">import</span> <span class="n">standardize_null_vals</span>
+<span class="n">standardize_null_vals</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>df</strong> (pd.DataFrame):
+The DataFrame that needs null value standardization</li>
+<li><strong>null_val</strong> (obj, default=np.nan):
+The value that all null values should be set to</li>
 </ul>
 </div>
 
