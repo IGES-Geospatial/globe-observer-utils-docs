@@ -82,13 +82,16 @@
                     <a class="function" href="#add_flags">add_flags</a>
             </li>
             <li>
-                    <a class="function" href="#plot_photo_entries">plot_photo_entries</a>
+                    <a class="function" href="#plot_valid_entries">plot_valid_entries</a>
             </li>
             <li>
                     <a class="function" href="#photo_subjects">photo_subjects</a>
             </li>
             <li>
                     <a class="function" href="#diagnostic_plots">diagnostic_plots</a>
+            </li>
+            <li>
+                    <a class="function" href="#qa_filter">qa_filter</a>
             </li>
     </ul>
 
@@ -153,10 +156,7 @@
     <span class="n">standardize_null_vals</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">go_utils.plot</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">plot_int_distribution</span><span class="p">,</span>
-    <span class="n">completeness_histogram</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">go_utils.plot</span> <span class="kn">import</span> <span class="n">plot_int_distribution</span><span class="p">,</span> <span class="n">completeness_histogram</span><span class="p">,</span> <span class="n">plot_freq_bar</span>
 
 
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
@@ -503,7 +503,7 @@
     <span class="n">completion_score_flag</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">plot_photo_entries</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_valid_entries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bit_col</span><span class="p">,</span> <span class="n">entry_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the number of entries with photos and the number of entries without photos</span>
 
@@ -513,11 +513,11 @@
 <span class="sd">        The DataFrame containing Mosquito Habitat Mapper Data with the PhotoBitDecimal Flag.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="n">num_valid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;mhm_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Entries with Photos vs No Photos&quot;</span><span class="p">)</span>
+    <span class="n">num_valid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">bit_col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entries with </span><span class="si">{</span><span class="n">entry_type</span><span class="si">}</span><span class="s2"> vs No </span><span class="si">{</span><span class="n">entry_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Entries&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;Valid Photos&quot;</span><span class="p">,</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#e34a33&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;No Photos&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#fdcc8a&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">entry_type</span><span class="p">,</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#e34a33&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No </span><span class="si">{</span><span class="n">entry_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#fdcc8a&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">photo_subjects</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">):</span>
@@ -538,8 +538,10 @@
         <span class="n">total_dict</span><span class="p">[</span><span class="s2">&quot;Abdomen Photos&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">total_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-
+        <span class="k">if</span> <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Mosquito Habitat Mapper - Photo Subject Frequencies (Log Scale)&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Photo Type&quot;</span><span class="p">)</span>
@@ -565,7 +567,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plot_int_distribution</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;mhm_LarvaeCount&quot;</span><span class="p">,</span> <span class="s2">&quot;Larvae Count&quot;</span><span class="p">)</span>
     <span class="n">photo_subjects</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">)</span>
-    <span class="n">plot_photo_entries</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">)</span>
+    <span class="n">plot_freq_bar</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;Mosquito Habitat Mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;mhm_Genus&quot;</span><span class="p">,</span> <span class="s2">&quot;Genus Types&quot;</span><span class="p">)</span>
+    <span class="n">plot_valid_entries</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;mhm_HasGenus&quot;</span><span class="p">,</span> <span class="s2">&quot;Genus Classifications&quot;</span><span class="p">)</span>
+    <span class="n">plot_valid_entries</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;mhm_PhotoBitDecimal&quot;</span><span class="p">,</span> <span class="s2">&quot;Valid Photos&quot;</span><span class="p">)</span>
     <span class="n">completeness_histogram</span><span class="p">(</span>
         <span class="n">mhm_df</span><span class="p">,</span>
         <span class="s2">&quot;Mosquito Habitat Mapper&quot;</span><span class="p">,</span>
@@ -578,6 +582,25 @@
         <span class="s2">&quot;mhm_SubCompletenessScore&quot;</span><span class="p">,</span>
         <span class="s2">&quot;Sub Completeness&quot;</span><span class="p">,</span>
     <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">qa_filter</span><span class="p">(</span>
+    <span class="n">mhm_df</span><span class="p">,</span>
+    <span class="n">has_genus</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">min_larvae_count</span><span class="o">=-</span><span class="mi">9999</span><span class="p">,</span>
+    <span class="n">has_photos</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">is_container</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_LarvaeCount&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">min_larvae_count</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">has_genus</span><span class="p">:</span>
+        <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_HasGenus&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">has_photos</span><span class="p">:</span>
+        <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">is_container</span><span class="p">:</span>
+        <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_IsWaterSourceContainer&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">mhm_df</span>
 </pre></div>
 
         </details>
@@ -1213,17 +1236,17 @@ A DataFrame containing cleaned up Mosquito Habitat Mapper Data ideally from the 
 
 
                 </section>
-                <section id="plot_photo_entries">
-                            <div class="attr function"><a class="headerlink" href="#plot_photo_entries">#&nbsp;&nbsp</a>
+                <section id="plot_valid_entries">
+                            <div class="attr function"><a class="headerlink" href="#plot_valid_entries">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">plot_photo_entries</span><span class="signature">(df)</span>:
+            <span class="name">plot_valid_entries</span><span class="signature">(df, bit_col, entry_type)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">plot_photo_entries</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">plot_valid_entries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bit_col</span><span class="p">,</span> <span class="n">entry_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the number of entries with photos and the number of entries without photos</span>
 
@@ -1233,11 +1256,11 @@ A DataFrame containing cleaned up Mosquito Habitat Mapper Data ideally from the 
 <span class="sd">        The DataFrame containing Mosquito Habitat Mapper Data with the PhotoBitDecimal Flag.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="n">num_valid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;mhm_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Entries with Photos vs No Photos&quot;</span><span class="p">)</span>
+    <span class="n">num_valid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">bit_col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entries with </span><span class="si">{</span><span class="n">entry_type</span><span class="si">}</span><span class="s2"> vs No </span><span class="si">{</span><span class="n">entry_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Entries&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;Valid Photos&quot;</span><span class="p">,</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#e34a33&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s2">&quot;No Photos&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#fdcc8a&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">entry_type</span><span class="p">,</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#e34a33&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No </span><span class="si">{</span><span class="n">entry_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_valid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#fdcc8a&quot;</span><span class="p">)</span>
 </pre></div>
 
         </details>
@@ -1282,8 +1305,10 @@ The DataFrame containing Mosquito Habitat Mapper Data with the PhotoBitDecimal F
         <span class="n">total_dict</span><span class="p">[</span><span class="s2">&quot;Abdomen Photos&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">number</span> <span class="o">&amp;</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">total_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-
+        <span class="k">if</span> <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">total_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Mosquito Habitat Mapper - Photo Subject Frequencies (Log Scale)&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Photo Type&quot;</span><span class="p">)</span>
@@ -1333,7 +1358,9 @@ The DataFrame containing Mosquito Habitat Mapper Data with the PhotoBitDecimal F
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plot_int_distribution</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;mhm_LarvaeCount&quot;</span><span class="p">,</span> <span class="s2">&quot;Larvae Count&quot;</span><span class="p">)</span>
     <span class="n">photo_subjects</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">)</span>
-    <span class="n">plot_photo_entries</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">)</span>
+    <span class="n">plot_freq_bar</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;Mosquito Habitat Mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;mhm_Genus&quot;</span><span class="p">,</span> <span class="s2">&quot;Genus Types&quot;</span><span class="p">)</span>
+    <span class="n">plot_valid_entries</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;mhm_HasGenus&quot;</span><span class="p">,</span> <span class="s2">&quot;Genus Classifications&quot;</span><span class="p">)</span>
+    <span class="n">plot_valid_entries</span><span class="p">(</span><span class="n">mhm_df</span><span class="p">,</span> <span class="s2">&quot;mhm_PhotoBitDecimal&quot;</span><span class="p">,</span> <span class="s2">&quot;Valid Photos&quot;</span><span class="p">)</span>
     <span class="n">completeness_histogram</span><span class="p">(</span>
         <span class="n">mhm_df</span><span class="p">,</span>
         <span class="s2">&quot;Mosquito Habitat Mapper&quot;</span><span class="p">,</span>
@@ -1370,6 +1397,46 @@ The DataFrame containing Flagged and Cleaned Mosquito Habitat Mapper Data.</li>
 </ul>
 </div>
 
+
+                </section>
+                <section id="qa_filter">
+                            <div class="attr function"><a class="headerlink" href="#qa_filter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">qa_filter</span><span class="signature">(
+    mhm_df,
+    has_genus=False,
+    min_larvae_count=-9999,
+    has_photos=False,
+    is_container=False
+)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">qa_filter</span><span class="p">(</span>
+    <span class="n">mhm_df</span><span class="p">,</span>
+    <span class="n">has_genus</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">min_larvae_count</span><span class="o">=-</span><span class="mi">9999</span><span class="p">,</span>
+    <span class="n">has_photos</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">is_container</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_LarvaeCount&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">min_larvae_count</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">has_genus</span><span class="p">:</span>
+        <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_HasGenus&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">has_photos</span><span class="p">:</span>
+        <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">is_container</span><span class="p">:</span>
+        <span class="n">mhm_df</span> <span class="o">=</span> <span class="n">mhm_df</span><span class="p">[</span><span class="n">mhm_df</span><span class="p">[</span><span class="s2">&quot;mhm_IsWaterSourceContainer&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">mhm_df</span>
+</pre></div>
+
+        </details>
+
+    
 
                 </section>
     </main>

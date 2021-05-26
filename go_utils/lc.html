@@ -93,6 +93,9 @@
             <li>
                     <a class="function" href="#diagnostic_plots">diagnostic_plots</a>
             </li>
+            <li>
+                    <a class="function" href="#qa_filter">qa_filter</a>
+            </li>
     </ul>
 
 
@@ -707,6 +710,25 @@
     <span class="n">completeness_histogram</span><span class="p">(</span>
         <span class="n">lc_df</span><span class="p">,</span> <span class="s2">&quot;Land Cover&quot;</span><span class="p">,</span> <span class="s2">&quot;lc_SubCompletenessScore&quot;</span><span class="p">,</span> <span class="s2">&quot;Sub Completeness&quot;</span>
     <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">qa_filter</span><span class="p">(</span>
+    <span class="n">lc_df</span><span class="p">,</span>
+    <span class="n">has_classification</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">has_photo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">has_all_photos</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">has_all_classifications</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">if</span> <span class="n">has_classification</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_all_classifications</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_ClassificationBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">has_all_classifications</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_ClassificationBitDecimal&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">15</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">has_photo</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_all_photos</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">has_all_photos</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">63</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">lc_df</span>
 </pre></div>
 
         </details>
@@ -1698,6 +1720,46 @@ The DataFrame containing Flagged and Cleaned Land Cover Data.</li>
 </ul>
 </div>
 
+
+                </section>
+                <section id="qa_filter">
+                            <div class="attr function"><a class="headerlink" href="#qa_filter">#&nbsp;&nbsp</a>
+
+        
+            <span class="def">def</span>
+            <span class="name">qa_filter</span><span class="signature">(
+    lc_df,
+    has_classification=False,
+    has_photo=False,
+    has_all_photos=False,
+    has_all_classifications=False
+)</span>:
+    </div>
+
+                <details>
+            <summary>View Source</summary>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">qa_filter</span><span class="p">(</span>
+    <span class="n">lc_df</span><span class="p">,</span>
+    <span class="n">has_classification</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">has_photo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">has_all_photos</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">has_all_classifications</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">if</span> <span class="n">has_classification</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_all_classifications</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_ClassificationBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">has_all_classifications</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_ClassificationBitDecimal&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">15</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">has_photo</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_all_photos</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">has_all_photos</span><span class="p">:</span>
+        <span class="n">lc_df</span> <span class="o">=</span> <span class="n">lc_df</span><span class="p">[</span><span class="n">lc_df</span><span class="p">[</span><span class="s2">&quot;lc_PhotoBitDecimal&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">63</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">lc_df</span>
+</pre></div>
+
+        </details>
+
+    
 
                 </section>
     </main>
