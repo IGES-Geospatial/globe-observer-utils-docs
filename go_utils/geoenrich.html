@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="pdoc 7.1.1" />
-    <title>go_utils.download API documentation</title>
+    <title>go_utils.geoenrich API documentation</title>
     <link rel="" type="" href=""/>
 
     <script>
@@ -45,19 +45,7 @@
                     <h2>API Documentation</h2>
                         <ul class="memberlist">
             <li>
-                    <a class="function" href="#parse_api_data">parse_api_data</a>
-            </li>
-            <li>
-                    <a class="function" href="#is_valid_latlon_box">is_valid_latlon_box</a>
-            </li>
-            <li>
-                    <a class="function" href="#get_api_data">get_api_data</a>
-            </li>
-            <li>
-                    <a class="function" href="#convert_dates_to_datetime">convert_dates_to_datetime</a>
-            </li>
-            <li>
-                    <a class="function" href="#default_data_clean">default_data_clean</a>
+                    <a class="function" href="#get_country_api_data">get_country_api_data</a>
             </li>
     </ul>
 
@@ -72,326 +60,249 @@
     <main class="pdoc">
             <section>
                     <h1 class="modulename">
-<a href="./../go_utils.html">go_utils</a><wbr>.download    </h1>
+<a href="./../go_utils.html">go_utils</a><wbr>.geoenrich    </h1>
 
                 
                         <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+            <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">go_utils.info</span> <span class="kn">import</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span>
-<span class="kn">import</span> <span class="nn">go_utils.mhm</span> <span class="k">as</span> <span class="nn">mhm</span>
-<span class="kn">import</span> <span class="nn">go_utils.lc</span> <span class="k">as</span> <span class="nn">lc</span>
+<span class="kn">from</span> <span class="nn">arcgis.features</span> <span class="kn">import</span> <span class="n">GeoAccessor</span>
+<span class="kn">from</span> <span class="nn">arcgis.gis</span> <span class="kn">import</span> <span class="n">GIS</span>
 
-
-<span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Data Download Failed. The GLOBE API is most likely down.&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Expand the &#39;data&#39; column by listing the contents and passing as a new dataframe</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># Drop the previously nested data column</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># Display the dataframe</span>
-    <span class="k">return</span> <span class="n">df</span>
+<span class="kn">from</span> <span class="nn">go_utils.download</span> <span class="kn">import</span> <span class="n">convert_dates_to_datetime</span><span class="p">,</span> <span class="n">default_data_clean</span>
+<span class="kn">from</span> <span class="nn">go_utils.info</span> <span class="kn">import</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">region_dict</span><span class="p">,</span> <span class="n">abbreviation_dict</span>
 
 
-<span class="k">def</span> <span class="nf">is_valid_latlon_box</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">):</span>
-
-    <span class="n">valid_lat_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lat&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">]</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">90</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lat&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">90</span>
-    <span class="p">)</span>
-    <span class="n">valid_lon_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lon&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">]</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">180</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lon&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">180</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">valid_lon_checks</span> <span class="ow">and</span> <span class="n">valid_lat_checks</span>
-
-
-<span class="k">def</span> <span class="nf">get_api_data</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">get_country_api_data</span><span class="p">(</span>
     <span class="n">protocol</span><span class="p">,</span>
     <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
     <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
     <span class="n">is_clean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">latlon_box</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min_lat&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;max_lat&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;min_lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;max_lon&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
+    <span class="n">countries</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">regions</span><span class="o">=</span><span class="p">[],</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Utility function for interfacing with the GLOBE API.</span>
-<span class="sd">    More information about the API can be viewed [here](https://www.globe.gov/es/globe-data/globe-api).</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets country enriched API Data. Due note that this data comes from layers in ArcGIS that are updated daily. Therefore, there will be some delay between when an entry is uploaded onto the GLOBE data base and being on the ArcGIS dataset.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    protocol : str</span>
-<span class="sd">               The desired GLOBE Observer Protocol. Protocols for the App protocols include: `land_covers` (Landcover), `mosquito_habitat_mapper` (Mosquito Habitat Mapper), `sky_conditions` (Clouds), `tree_heights` (Trees).</span>
+<span class="sd">    protocol : str, {&quot;mosquito_habitat_mapper&quot;, &quot;land_covers&quot;}</span>
+<span class="sd">        The desired GLOBE Observer Protocol. Currently only mosquito habitat mapper and land cover is supported.</span>
 <span class="sd">    start_date : str, default= 2017-05-31</span>
-<span class="sd">                 The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
+<span class="sd">        The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
 <span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
-<span class="sd">               The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
+<span class="sd">        The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
+<span class="sd">    countries : list of str, default=[]</span>
+<span class="sd">        The list of desired countries. Look at go_utils.info.region_dict to see supported country names. If the list is empty, all data will be included.</span>
+<span class="sd">    regions : list of str, default=[]</span>
+<span class="sd">        The list of desired regions. Look at go_utils.info.region_dict to see supported region names and the countries they enclose. If the list is empty, all data will be included.</span>
 <span class="sd">    latlon_box : dict of {str, double}, optional</span>
-<span class="sd">                 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    pd.DataFrame</span>
-<span class="sd">      A DataFrame containing Raw GLOBE Observer Data of the specified parameters</span>
+<span class="sd">        The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">is_valid_latlon_box</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">):</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/lat/lon/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;minlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;minlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;You did not enter any valid/specific coordinates, so we gave you all the observations for your protocol, date_range, and any countryNames you may have specified.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
+    <span class="n">item_id_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span> <span class="s2">&quot;4e8bdb70b3d6424b8831e9cc621cf3b6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;land_covers&quot;</span><span class="p">:</span> <span class="s2">&quot;c68acbfc68db4409b495fd4636646aa6&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
 
-    <span class="c1"># Downloads data from the GLOBE API</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="s2">&quot;Failed to get data from the API. Double check your specified settings to make sure they are valid.&quot;</span>
+    <span class="k">if</span> <span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_id_dict</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid protocol, currently only &#39;mosquito_habitat_mapper&#39; and &#39;land_covers&#39; are supported.&quot;</span>
         <span class="p">)</span>
 
-    <span class="c1"># Convert measured date data into datetime</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="n">gis</span> <span class="o">=</span> <span class="n">GIS</span><span class="p">()</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">gis</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">itemid</span><span class="o">=</span><span class="n">item_id_dict</span><span class="p">[</span><span class="n">protocol</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">GeoAccessor</span><span class="o">.</span><span class="n">from_layer</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;SHAPE&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Due to the size of the mhm column names, ArcGIS truncates the names so it must be renamed in this step.</span>
+    <span class="k">if</span> <span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span>
+
+        <span class="n">mhm_rename_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;mosquitohabitatmapperAbdomenClo&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperAbdomenCloseupPhotoUrls&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperBreedingGr&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperBreedingGroundEliminated&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperLarvaFullB&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperLarvaFullBodyPhotoUrls&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperLarvaeCoun&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperLarvaeCount&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperLastIdenti&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperLastIdentifyStage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMeasurem_1&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMeasurementLatitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMeasurem_2&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMeasurementLongitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMeasuremen&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMeasurementElevation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoAd&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoAdults&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoEg&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoEggs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoHa&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoHabitatMapperId&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoPu&quot;</span><span class="p">:</span> <span class="s2">&quot; mosquitohabitatmapperMosquitoPupae&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquito_1&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoEggCount&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperWaterSou_1&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperWaterSourcePhotoUrls&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperWaterSou_2&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperWaterSourceType&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperWaterSourc&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperWaterSource&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+            <span class="n">mhm_rename_dict</span><span class="p">,</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Filter the dates</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">measured_at</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;MeasuredAt&quot;</span>
+
     <span class="n">convert_dates_to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)]</span>
 
     <span class="k">if</span> <span class="n">is_clean</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">countries</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">regions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">df</span>
 
 
-<span class="k">def</span> <span class="nf">convert_dates_to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">date_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">&quot;Date&quot;</span> <span class="ow">in</span> <span class="n">col</span> <span class="ow">or</span> <span class="s2">&quot;MeasuredAt&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">date_columns</span><span class="p">:</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">):</span>
-    <span class="n">module_mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span> <span class="n">mhm</span><span class="p">,</span> <span class="s2">&quot;land_covers&quot;</span><span class="p">:</span> <span class="n">lc</span><span class="p">}</span>
-    <span class="k">if</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">module_mapper</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">module_mapper</span><span class="p">[</span><span class="n">protocol</span><span class="p">]</span><span class="o">.</span><span class="n">apply_cleanup</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">module_mapper</span><span class="p">[</span><span class="n">protocol</span><span class="p">]</span><span class="o">.</span><span class="n">add_flags</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;The protocol you entered is not supported for cleanup.&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">df</span>
+<span class="k">def</span> <span class="nf">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">country_list</span><span class="p">):</span>
+    <span class="n">country_filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">country_col</span><span class="p">:</span> <span class="n">country_col</span> <span class="ow">in</span> <span class="n">country_list</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">country_filter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">abbreviation_dict</span><span class="p">[</span><span class="n">protocol</span><span class="p">]</span><span class="si">}</span><span class="s2">_COUNTRY&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 </pre></div>
 
         </details>
 
             </section>
-                <section id="parse_api_data">
-                            <div class="attr function"><a class="headerlink" href="#parse_api_data">#&nbsp;&nbsp</a>
+                <section id="get_country_api_data">
+                            <div class="attr function"><a class="headerlink" href="#get_country_api_data">#&nbsp;&nbsp</a>
 
         
             <span class="def">def</span>
-            <span class="name">parse_api_data</span><span class="signature">(response_json)</span>:
-    </div>
-
-                <details>
-            <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_api_data</span><span class="p">(</span><span class="n">response_json</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Data Download Failed. The GLOBE API is most likely down.&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Expand the &#39;data&#39; column by listing the contents and passing as a new dataframe</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># Drop the previously nested data column</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># Display the dataframe</span>
-    <span class="k">return</span> <span class="n">df</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
-                <section id="is_valid_latlon_box">
-                            <div class="attr function"><a class="headerlink" href="#is_valid_latlon_box">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">is_valid_latlon_box</span><span class="signature">(latlon_box)</span>:
-    </div>
-
-                <details>
-            <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">is_valid_latlon_box</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">):</span>
-
-    <span class="n">valid_lat_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lat&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">]</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lat&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">90</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lat&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">90</span>
-    <span class="p">)</span>
-    <span class="n">valid_lon_checks</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lon&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">]</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;max_lon&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">180</span>
-        <span class="ow">and</span> <span class="n">latlon_box</span><span class="p">[</span><span class="s2">&quot;min_lon&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">180</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">valid_lon_checks</span> <span class="ow">and</span> <span class="n">valid_lat_checks</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
-                <section id="get_api_data">
-                            <div class="attr function"><a class="headerlink" href="#get_api_data">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">get_api_data</span><span class="signature">(
+            <span class="name">get_country_api_data</span><span class="signature">(
     protocol,
     start_date=&#39;2017-05-31&#39;,
     end_date=&#39;2021-06-22&#39;,
     is_clean=True,
-    latlon_box={&#39;min_lat&#39;: -90, &#39;max_lat&#39;: 90, &#39;min_lon&#39;: -180, &#39;max_lon&#39;: 180}
+    countries=[],
+    regions=[]
 )</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_api_data</span><span class="p">(</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_country_api_data</span><span class="p">(</span>
     <span class="n">protocol</span><span class="p">,</span>
     <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
     <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
     <span class="n">is_clean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">latlon_box</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min_lat&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;max_lat&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;min_lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;max_lon&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
+    <span class="n">countries</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">regions</span><span class="o">=</span><span class="p">[],</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Utility function for interfacing with the GLOBE API.</span>
-<span class="sd">    More information about the API can be viewed [here](https://www.globe.gov/es/globe-data/globe-api).</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets country enriched API Data. Due note that this data comes from layers in ArcGIS that are updated daily. Therefore, there will be some delay between when an entry is uploaded onto the GLOBE data base and being on the ArcGIS dataset.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    protocol : str</span>
-<span class="sd">               The desired GLOBE Observer Protocol. Protocols for the App protocols include: `land_covers` (Landcover), `mosquito_habitat_mapper` (Mosquito Habitat Mapper), `sky_conditions` (Clouds), `tree_heights` (Trees).</span>
+<span class="sd">    protocol : str, {&quot;mosquito_habitat_mapper&quot;, &quot;land_covers&quot;}</span>
+<span class="sd">        The desired GLOBE Observer Protocol. Currently only mosquito habitat mapper and land cover is supported.</span>
 <span class="sd">    start_date : str, default= 2017-05-31</span>
-<span class="sd">                 The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
+<span class="sd">        The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
 <span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
-<span class="sd">               The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
+<span class="sd">        The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
+<span class="sd">    countries : list of str, default=[]</span>
+<span class="sd">        The list of desired countries. Look at go_utils.info.region_dict to see supported country names. If the list is empty, all data will be included.</span>
+<span class="sd">    regions : list of str, default=[]</span>
+<span class="sd">        The list of desired regions. Look at go_utils.info.region_dict to see supported region names and the countries they enclose. If the list is empty, all data will be included.</span>
 <span class="sd">    latlon_box : dict of {str, double}, optional</span>
-<span class="sd">                 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    pd.DataFrame</span>
-<span class="sd">      A DataFrame containing Raw GLOBE Observer Data of the specified parameters</span>
+<span class="sd">        The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">is_valid_latlon_box</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">):</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/lat/lon/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;minlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlat=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lat&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;minlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;min_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;maxlon=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">latlon_box</span><span class="p">[</span><span class="s1">&#39;max_lon&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;You did not enter any valid/specific coordinates, so we gave you all the observations for your protocol, date_range, and any countryNames you may have specified.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.globe.gov/search/v1/measurement/protocol/measureddate/?protocols=</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&amp;startdate=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&amp;enddate=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&amp;geojson=FALSE&amp;sample=FALSE&quot;</span>
+    <span class="n">item_id_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span> <span class="s2">&quot;4e8bdb70b3d6424b8831e9cc621cf3b6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;land_covers&quot;</span><span class="p">:</span> <span class="s2">&quot;c68acbfc68db4409b495fd4636646aa6&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
 
-    <span class="c1"># Downloads data from the GLOBE API</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="s2">&quot;Failed to get data from the API. Double check your specified settings to make sure they are valid.&quot;</span>
+    <span class="k">if</span> <span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_id_dict</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid protocol, currently only &#39;mosquito_habitat_mapper&#39; and &#39;land_covers&#39; are supported.&quot;</span>
         <span class="p">)</span>
 
-    <span class="c1"># Convert measured date data into datetime</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">parse_api_data</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="n">gis</span> <span class="o">=</span> <span class="n">GIS</span><span class="p">()</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">gis</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">itemid</span><span class="o">=</span><span class="n">item_id_dict</span><span class="p">[</span><span class="n">protocol</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">GeoAccessor</span><span class="o">.</span><span class="n">from_layer</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;SHAPE&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Due to the size of the mhm column names, ArcGIS truncates the names so it must be renamed in this step.</span>
+    <span class="k">if</span> <span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span>
+
+        <span class="n">mhm_rename_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;mosquitohabitatmapperAbdomenClo&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperAbdomenCloseupPhotoUrls&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperBreedingGr&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperBreedingGroundEliminated&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperLarvaFullB&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperLarvaFullBodyPhotoUrls&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperLarvaeCoun&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperLarvaeCount&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperLastIdenti&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperLastIdentifyStage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMeasurem_1&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMeasurementLatitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMeasurem_2&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMeasurementLongitude&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMeasuremen&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMeasurementElevation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoAd&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoAdults&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoEg&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoEggs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoHa&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoHabitatMapperId&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquitoPu&quot;</span><span class="p">:</span> <span class="s2">&quot; mosquitohabitatmapperMosquitoPupae&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperMosquito_1&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperMosquitoEggCount&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperWaterSou_1&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperWaterSourcePhotoUrls&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperWaterSou_2&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperWaterSourceType&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mosquitohabitatmapperWaterSourc&quot;</span><span class="p">:</span> <span class="s2">&quot;mosquitohabitatmapperWaterSource&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+            <span class="n">mhm_rename_dict</span><span class="p">,</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Filter the dates</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">measured_at</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;MeasuredAt&quot;</span>
+
     <span class="n">convert_dates_to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)]</span>
 
     <span class="k">if</span> <span class="n">is_clean</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">countries</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">regions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
         </details>
 
-            <div class="docstring"><p>Utility function for interfacing with the GLOBE API.
-More information about the API can be viewed <a href="https://www.globe.gov/es/globe-data/globe-api">here</a>.</p>
+            <div class="docstring"><p>Gets country enriched API Data. Due note that this data comes from layers in ArcGIS that are updated daily. Therefore, there will be some delay between when an entry is uploaded onto the GLOBE data base and being on the ArcGIS dataset.</p>
 
 <h6 id="parameters">Parameters</h6>
 
 <ul>
-<li><strong>protocol</strong> (str):
-The desired GLOBE Observer Protocol. Protocols for the App protocols include: <code>land_covers</code> (Landcover), <code>mosquito_habitat_mapper</code> (Mosquito Habitat Mapper), <code>sky_conditions</code> (Clouds), <code>tree_heights</code> (Trees).</li>
+<li><strong>protocol</strong> (str, {"mosquito_habitat_mapper", "land_covers"}):
+The desired GLOBE Observer Protocol. Currently only mosquito habitat mapper and land cover is supported.</li>
 <li><strong>start_date</strong> (str, default= 2017-05-31):
 The desired start date of the dataset in the format of (YYYY-MM-DD).</li>
 <li><strong>end_date</strong> (str, default= today's date in YYYY-MM-DD form.):
 The desired end date of the dataset in the format of (YYYY-MM-DD).</li>
+<li><strong>countries</strong> (list of str, default=[]):
+The list of desired countries. Look at <a href="info.html#region_dict">go_utils.info.region_dict</a> to see supported country names. If the list is empty, all data will be included.</li>
+<li><strong>regions</strong> (list of str, default=[]):
+The list of desired regions. Look at <a href="info.html#region_dict">go_utils.info.region_dict</a> to see supported region names and the countries they enclose. If the list is empty, all data will be included.</li>
 <li><strong>latlon_box</strong> (dict of {str, double}, optional):
 The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: "min_lat", "min_lon", "max_lat", "max_lon". The default value specifies all latitude and longitude coordinates.</li>
 </ul>
-
-<h6 id="returns">Returns</h6>
-
-<ul>
-<li><strong>pd.DataFrame</strong>: A DataFrame containing Raw GLOBE Observer Data of the specified parameters</li>
-</ul>
 </div>
 
-
-                </section>
-                <section id="convert_dates_to_datetime">
-                            <div class="attr function"><a class="headerlink" href="#convert_dates_to_datetime">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">convert_dates_to_datetime</span><span class="signature">(df)</span>:
-    </div>
-
-                <details>
-            <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">convert_dates_to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">date_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">&quot;Date&quot;</span> <span class="ow">in</span> <span class="n">col</span> <span class="ow">or</span> <span class="s2">&quot;MeasuredAt&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">date_columns</span><span class="p">:</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
-</pre></div>
-
-        </details>
-
-    
-
-                </section>
-                <section id="default_data_clean">
-                            <div class="attr function"><a class="headerlink" href="#default_data_clean">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">default_data_clean</span><span class="signature">(df, protocol)</span>:
-    </div>
-
-                <details>
-            <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">):</span>
-    <span class="n">module_mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span> <span class="n">mhm</span><span class="p">,</span> <span class="s2">&quot;land_covers&quot;</span><span class="p">:</span> <span class="n">lc</span><span class="p">}</span>
-    <span class="k">if</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">module_mapper</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">module_mapper</span><span class="p">[</span><span class="n">protocol</span><span class="p">]</span><span class="o">.</span><span class="n">apply_cleanup</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">module_mapper</span><span class="p">[</span><span class="n">protocol</span><span class="p">]</span><span class="o">.</span><span class="n">add_flags</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;The protocol you entered is not supported for cleanup.&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">df</span>
-</pre></div>
-
-        </details>
-
-    
 
                 </section>
     </main>
