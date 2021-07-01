@@ -167,6 +167,8 @@
 <span class="k">def</span> <span class="nf">get_mhm_download_targets</span><span class="p">(</span>
     <span class="n">mhm_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Longitude&quot;</span><span class="p">,</span>
     <span class="n">watersource_col</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSource&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;mhm_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;mhm_MosquitoHabitatMapperId&quot;</span><span class="p">,</span>
@@ -185,6 +187,10 @@
 <span class="sd">        Mosquito Habitat Mapper Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;mhm_Latitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;mhm_Longitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Longitude</span>
 <span class="sd">    watersource_col : str, default = &quot;mhm_WaterSource&quot;</span>
 <span class="sd">        The column name of the column that contains the watersource</span>
 <span class="sd">    date_col : str, default = &quot;mhm_measuredDate&quot;</span>
@@ -210,7 +216,17 @@
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url_entry</span><span class="p">,</span> <span class="n">url_type</span><span class="p">,</span> <span class="n">watersource</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">mhm_id</span><span class="p">,</span> <span class="n">genus</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span>
+        <span class="n">url_entry</span><span class="p">,</span>
+        <span class="n">url_type</span><span class="p">,</span>
+        <span class="n">latitude</span><span class="p">,</span>
+        <span class="n">longitude</span><span class="p">,</span>
+        <span class="n">watersource</span><span class="p">,</span>
+        <span class="n">date</span><span class="p">,</span>
+        <span class="n">mhm_id</span><span class="p">,</span>
+        <span class="n">genus</span><span class="p">,</span>
+        <span class="n">species</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url_entry</span><span class="p">):</span>
             <span class="k">return</span>
 
@@ -226,7 +242,7 @@
                 <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
             <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
                 <span class="n">classification</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">species</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;mhm-</span><span class="si">{</span><span class="n">url_type</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">watersource</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">mhm_id</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;mhm_</span><span class="si">{</span><span class="n">url_type</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">watersource</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">mhm_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
             <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
 
@@ -237,6 +253,8 @@
             <span class="n">get_mosquito_args</span><span class="p">(</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">_format_param_name</span><span class="p">(</span><span class="n">param_name</span><span class="p">),</span>
+                <span class="n">mhm_df</span><span class="p">[</span><span class="n">latitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                <span class="n">mhm_df</span><span class="p">[</span><span class="n">longitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">watersource_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">date_col</span><span class="p">],</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
@@ -249,6 +267,8 @@
 <span class="k">def</span> <span class="nf">download_mhm_photos</span><span class="p">(</span>
     <span class="n">mhm_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Longitude&quot;</span><span class="p">,</span>
     <span class="n">watersource_col</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSource&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;mhm_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;mhm_MosquitoHabitatMapperId&quot;</span><span class="p">,</span>
@@ -267,6 +287,10 @@
 <span class="sd">        Mosquito Habitat Mapper Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;mhm_Latitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;mhm_Longitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Longitude</span>
 <span class="sd">    watersource_col : str, default = &quot;mhm_WaterSource&quot;</span>
 <span class="sd">        The column name of the column that contains the watersource</span>
 <span class="sd">    date_col : str, default = &quot;mhm_measuredDate&quot;</span>
@@ -299,6 +323,8 @@
 <span class="k">def</span> <span class="nf">get_lc_download_targets</span><span class="p">(</span>
     <span class="n">lc_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Longitude&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;lc_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;lc_LandCoverId&quot;</span><span class="p">,</span>
     <span class="n">up_photo</span><span class="o">=</span><span class="s2">&quot;lc_UpwardPhotoUrl&quot;</span><span class="p">,</span>
@@ -317,6 +343,10 @@
 <span class="sd">        Cleaned and Flagged Landcover Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;lc_Latitude&quot;</span>
+<span class="sd">        The column of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;lc_Longitude&quot;</span>
+<span class="sd">        The column of the column that contains the Longitude</span>
 <span class="sd">    date_col : str, default=&quot;lc_measuredDate&quot;</span>
 <span class="sd">        The column name of the column that contains the measured date</span>
 <span class="sd">    id_col : str, default=&quot;lc_LandCoverId&quot;</span>
@@ -342,13 +372,14 @@
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">lc_id</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">lc_id</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;https&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
             <span class="k">return</span>
+
         <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lc-</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">lc_id</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lc_</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">lc_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
 
@@ -358,6 +389,8 @@
             <span class="n">get_lc_photo_args</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">get_photo_args</span><span class="p">)</span>
             <span class="n">get_lc_photo_args</span><span class="p">(</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                <span class="n">lc_df</span><span class="p">[</span><span class="n">latitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                <span class="n">lc_df</span><span class="p">[</span><span class="n">longitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">_format_param_name</span><span class="p">(</span><span class="n">param_name</span><span class="p">),</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">date_col</span><span class="p">],</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
@@ -369,6 +402,8 @@
 <span class="k">def</span> <span class="nf">download_lc_photos</span><span class="p">(</span>
     <span class="n">lc_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Longitude&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;lc_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;lc_LandCoverId&quot;</span><span class="p">,</span>
     <span class="n">up_photo</span><span class="o">=</span><span class="s2">&quot;lc_UpwardPhotoUrl&quot;</span><span class="p">,</span>
@@ -387,6 +422,10 @@
 <span class="sd">        Cleaned and Flagged Landcover Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;lc_Latitude&quot;</span>
+<span class="sd">        The column of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;lc_Longitude&quot;</span>
+<span class="sd">        The column of the column that contains the Longitude</span>
 <span class="sd">    date_col : str, default=&quot;lc_measuredDate&quot;</span>
 <span class="sd">        The column name of the column that contains the measured date</span>
 <span class="sd">    id_col : str, default=&quot;lc_LandCoverId&quot;</span>
@@ -597,6 +636,8 @@ Contains tuples that store the url, directory, and filename of the desired photo
             <span class="name">get_mhm_download_targets</span><span class="signature">(
     mhm_df,
     directory,
+    latitude_col=&#39;mhm_Latitude&#39;,
+    longitude_col=&#39;mhm_Longitude&#39;,
     watersource_col=&#39;mhm_WaterSource&#39;,
     date_col=&#39;mhm_measuredDate&#39;,
     id_col=&#39;mhm_MosquitoHabitatMapperId&#39;,
@@ -613,6 +654,8 @@ Contains tuples that store the url, directory, and filename of the desired photo
             <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_mhm_download_targets</span><span class="p">(</span>
     <span class="n">mhm_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Longitude&quot;</span><span class="p">,</span>
     <span class="n">watersource_col</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSource&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;mhm_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;mhm_MosquitoHabitatMapperId&quot;</span><span class="p">,</span>
@@ -631,6 +674,10 @@ Contains tuples that store the url, directory, and filename of the desired photo
 <span class="sd">        Mosquito Habitat Mapper Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;mhm_Latitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;mhm_Longitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Longitude</span>
 <span class="sd">    watersource_col : str, default = &quot;mhm_WaterSource&quot;</span>
 <span class="sd">        The column name of the column that contains the watersource</span>
 <span class="sd">    date_col : str, default = &quot;mhm_measuredDate&quot;</span>
@@ -656,7 +703,17 @@ Contains tuples that store the url, directory, and filename of the desired photo
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url_entry</span><span class="p">,</span> <span class="n">url_type</span><span class="p">,</span> <span class="n">watersource</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">mhm_id</span><span class="p">,</span> <span class="n">genus</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span>
+        <span class="n">url_entry</span><span class="p">,</span>
+        <span class="n">url_type</span><span class="p">,</span>
+        <span class="n">latitude</span><span class="p">,</span>
+        <span class="n">longitude</span><span class="p">,</span>
+        <span class="n">watersource</span><span class="p">,</span>
+        <span class="n">date</span><span class="p">,</span>
+        <span class="n">mhm_id</span><span class="p">,</span>
+        <span class="n">genus</span><span class="p">,</span>
+        <span class="n">species</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url_entry</span><span class="p">):</span>
             <span class="k">return</span>
 
@@ -672,7 +729,7 @@ Contains tuples that store the url, directory, and filename of the desired photo
                 <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
             <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
                 <span class="n">classification</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">species</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;mhm-</span><span class="si">{</span><span class="n">url_type</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">watersource</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">mhm_id</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;mhm_</span><span class="si">{</span><span class="n">url_type</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">watersource</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">mhm_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
             <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
 
@@ -683,6 +740,8 @@ Contains tuples that store the url, directory, and filename of the desired photo
             <span class="n">get_mosquito_args</span><span class="p">(</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">_format_param_name</span><span class="p">(</span><span class="n">param_name</span><span class="p">),</span>
+                <span class="n">mhm_df</span><span class="p">[</span><span class="n">latitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                <span class="n">mhm_df</span><span class="p">[</span><span class="n">longitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">watersource_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">date_col</span><span class="p">],</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
@@ -703,6 +762,10 @@ Contains tuples that store the url, directory, and filename of the desired photo
 Mosquito Habitat Mapper Data</li>
 <li><strong>directory</strong> (str):
 The directory to save the photos</li>
+<li><strong>latitude_col</strong> (str, default="mhm_Latitude"):
+The column name of the column that contains the Latitude</li>
+<li><strong>longitude_col</strong> (str, default="mhm_Longitude"):
+The column name of the column that contains the Longitude</li>
 <li><strong>watersource_col</strong> (str, default = "mhm_WaterSource"):
 The column name of the column that contains the watersource</li>
 <li><strong>date_col</strong> (str, default = "mhm_measuredDate"):
@@ -738,6 +801,8 @@ The column name of the column that contains the abdomen photo urls. If not speci
             <span class="name">download_mhm_photos</span><span class="signature">(
     mhm_df,
     directory,
+    latitude_col=&#39;mhm_Latitude&#39;,
+    longitude_col=&#39;mhm_Longitude&#39;,
     watersource_col=&#39;mhm_WaterSource&#39;,
     date_col=&#39;mhm_measuredDate&#39;,
     id_col=&#39;mhm_MosquitoHabitatMapperId&#39;,
@@ -754,6 +819,8 @@ The column name of the column that contains the abdomen photo urls. If not speci
             <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">download_mhm_photos</span><span class="p">(</span>
     <span class="n">mhm_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;mhm_Longitude&quot;</span><span class="p">,</span>
     <span class="n">watersource_col</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSource&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;mhm_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;mhm_MosquitoHabitatMapperId&quot;</span><span class="p">,</span>
@@ -772,6 +839,10 @@ The column name of the column that contains the abdomen photo urls. If not speci
 <span class="sd">        Mosquito Habitat Mapper Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;mhm_Latitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;mhm_Longitude&quot;</span>
+<span class="sd">        The column name of the column that contains the Longitude</span>
 <span class="sd">    watersource_col : str, default = &quot;mhm_WaterSource&quot;</span>
 <span class="sd">        The column name of the column that contains the watersource</span>
 <span class="sd">    date_col : str, default = &quot;mhm_measuredDate&quot;</span>
@@ -812,6 +883,10 @@ The column name of the column that contains the abdomen photo urls. If not speci
 Mosquito Habitat Mapper Data</li>
 <li><strong>directory</strong> (str):
 The directory to save the photos</li>
+<li><strong>latitude_col</strong> (str, default="mhm_Latitude"):
+The column name of the column that contains the Latitude</li>
+<li><strong>longitude_col</strong> (str, default="mhm_Longitude"):
+The column name of the column that contains the Longitude</li>
 <li><strong>watersource_col</strong> (str, default = "mhm_WaterSource"):
 The column name of the column that contains the watersource</li>
 <li><strong>date_col</strong> (str, default = "mhm_measuredDate"):
@@ -847,6 +922,8 @@ The column name of the column that contains the abdomen photo urls. If not speci
             <span class="name">get_lc_download_targets</span><span class="signature">(
     lc_df,
     directory,
+    latitude_col=&#39;lc_Latitude&#39;,
+    longitude_col=&#39;lc_Longitude&#39;,
     date_col=&#39;lc_measuredDate&#39;,
     id_col=&#39;lc_LandCoverId&#39;,
     up_photo=&#39;lc_UpwardPhotoUrl&#39;,
@@ -863,6 +940,8 @@ The column name of the column that contains the abdomen photo urls. If not speci
             <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_lc_download_targets</span><span class="p">(</span>
     <span class="n">lc_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Longitude&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;lc_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;lc_LandCoverId&quot;</span><span class="p">,</span>
     <span class="n">up_photo</span><span class="o">=</span><span class="s2">&quot;lc_UpwardPhotoUrl&quot;</span><span class="p">,</span>
@@ -881,6 +960,10 @@ The column name of the column that contains the abdomen photo urls. If not speci
 <span class="sd">        Cleaned and Flagged Landcover Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;lc_Latitude&quot;</span>
+<span class="sd">        The column of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;lc_Longitude&quot;</span>
+<span class="sd">        The column of the column that contains the Longitude</span>
 <span class="sd">    date_col : str, default=&quot;lc_measuredDate&quot;</span>
 <span class="sd">        The column name of the column that contains the measured date</span>
 <span class="sd">    id_col : str, default=&quot;lc_LandCoverId&quot;</span>
@@ -906,13 +989,14 @@ The column name of the column that contains the abdomen photo urls. If not speci
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">lc_id</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">lc_id</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;https&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
             <span class="k">return</span>
+
         <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lc-</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">lc_id</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lc_</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">lc_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
 
@@ -922,6 +1006,8 @@ The column name of the column that contains the abdomen photo urls. If not speci
             <span class="n">get_lc_photo_args</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">get_photo_args</span><span class="p">)</span>
             <span class="n">get_lc_photo_args</span><span class="p">(</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                <span class="n">lc_df</span><span class="p">[</span><span class="n">latitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                <span class="n">lc_df</span><span class="p">[</span><span class="n">longitude_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">_format_param_name</span><span class="p">(</span><span class="n">param_name</span><span class="p">),</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">date_col</span><span class="p">],</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
@@ -941,6 +1027,10 @@ The column name of the column that contains the abdomen photo urls. If not speci
 Cleaned and Flagged Landcover Data</li>
 <li><strong>directory</strong> (str):
 The directory to save the photos</li>
+<li><strong>latitude_col</strong> (str, default="lc_Latitude"):
+The column of the column that contains the Latitude</li>
+<li><strong>longitude_col</strong> (str, default="lc_Longitude"):
+The column of the column that contains the Longitude</li>
 <li><strong>date_col</strong> (str, default="lc_measuredDate"):
 The column name of the column that contains the measured date</li>
 <li><strong>id_col</strong> (str, default="lc_LandCoverId"):
@@ -976,6 +1066,8 @@ The column name of the column that contains the west photo urls. If not specifie
             <span class="name">download_lc_photos</span><span class="signature">(
     lc_df,
     directory,
+    latitude_col=&#39;lc_Latitude&#39;,
+    longitude_col=&#39;lc_Longitude&#39;,
     date_col=&#39;lc_measuredDate&#39;,
     id_col=&#39;lc_LandCoverId&#39;,
     up_photo=&#39;lc_UpwardPhotoUrl&#39;,
@@ -992,6 +1084,8 @@ The column name of the column that contains the west photo urls. If not specifie
             <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">download_lc_photos</span><span class="p">(</span>
     <span class="n">lc_df</span><span class="p">,</span>
     <span class="n">directory</span><span class="p">,</span>
+    <span class="n">latitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Latitude&quot;</span><span class="p">,</span>
+    <span class="n">longitude_col</span><span class="o">=</span><span class="s2">&quot;lc_Longitude&quot;</span><span class="p">,</span>
     <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;lc_measuredDate&quot;</span><span class="p">,</span>
     <span class="n">id_col</span><span class="o">=</span><span class="s2">&quot;lc_LandCoverId&quot;</span><span class="p">,</span>
     <span class="n">up_photo</span><span class="o">=</span><span class="s2">&quot;lc_UpwardPhotoUrl&quot;</span><span class="p">,</span>
@@ -1010,6 +1104,10 @@ The column name of the column that contains the west photo urls. If not specifie
 <span class="sd">        Cleaned and Flagged Landcover Data</span>
 <span class="sd">    directory : str</span>
 <span class="sd">        The directory to save the photos</span>
+<span class="sd">    latitude_col : str, default=&quot;lc_Latitude&quot;</span>
+<span class="sd">        The column of the column that contains the Latitude</span>
+<span class="sd">    longitude_col : str, default=&quot;lc_Longitude&quot;</span>
+<span class="sd">        The column of the column that contains the Longitude</span>
 <span class="sd">    date_col : str, default=&quot;lc_measuredDate&quot;</span>
 <span class="sd">        The column name of the column that contains the measured date</span>
 <span class="sd">    id_col : str, default=&quot;lc_LandCoverId&quot;</span>
@@ -1051,6 +1149,10 @@ The column name of the column that contains the west photo urls. If not specifie
 Cleaned and Flagged Landcover Data</li>
 <li><strong>directory</strong> (str):
 The directory to save the photos</li>
+<li><strong>latitude_col</strong> (str, default="lc_Latitude"):
+The column of the column that contains the Latitude</li>
+<li><strong>longitude_col</strong> (str, default="lc_Longitude"):
+The column of the column that contains the Longitude</li>
 <li><strong>date_col</strong> (str, default="lc_measuredDate"):
 The column name of the column that contains the measured date</li>
 <li><strong>id_col</strong> (str, default="lc_LandCoverId"):

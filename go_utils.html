@@ -45,13 +45,65 @@
                     <h2>Contents</h2>
                     <ul>
   <li><a href="#main-features">Main Features</a></li>
+  <li><a href="#example-notebooks">Example Notebooks</a></li>
+  <li><a href="#cli-script-documentation">CLI Script Documentation</a></li>
+  <li><a href="#getting-globe-data-csvs">Getting GLOBE Data CSVs</a>
+  <ul>
+    <li><a href="#general-flags">General Flags</a>
+    <ul>
+      <li><a href="#output-path">Output Path</a></li>
+      <li><a href="#start-and-end-dates">Start and End Dates</a></li>
+      <li><a href="#countries">Countries</a></li>
+      <li><a href="#regions">Regions</a></li>
+      <li><a href="#bounding-box">Bounding Box</a></li>
+    </ul></li>
+    <li><a href="#mosquito-habitat-mapper-flags">Mosquito Habitat Mapper Flags</a>
+    <ul>
+      <li><a href="#genus">Genus</a></li>
+      <li><a href="#container">Container</a></li>
+      <li><a href="#photo">Photo</a></li>
+      <li><a href="#minimum-larvae-count">Minimum Larvae Count</a></li>
+      <li><a href="#example">Example</a></li>
+    </ul></li>
+    <li><a href="#land-cover-flags">Land Cover Flags</a>
+    <ul>
+      <li><a href="#has-a-classification">Has a Classification</a></li>
+      <li><a href="#has-photo">Has Photo</a></li>
+      <li><a href="#has-all-classifications">Has All Classifications</a></li>
+      <li><a href="#has-all-photos">Has All Photos</a></li>
+      <li><a href="#example-2">Example</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a href="#downloading-photos">Downloading Photos</a>
+  <ul>
+    <li><a href="#general-command">General Command</a>
+    <ul>
+      <li><a href="#all-flag">All Flag</a></li>
+    </ul></li>
+    <li><a href="#mosquito-specifics">Mosquito Specifics</a>
+    <ul>
+      <li><a href="#larvae-photos">Larvae Photos</a></li>
+      <li><a href="#watersource-photos">Watersource Photos</a></li>
+      <li><a href="#abdomen-photos">Abdomen Photos</a></li>
+      <li><a href="#example-3">Example</a></li>
+    </ul></li>
+    <li><a href="#landcover-specifics">Landcover Specifics</a>
+    <ul>
+      <li><a href="#up-photos">Up Photos</a></li>
+      <li><a href="#down-photos">Down Photos</a></li>
+      <li><a href="#north-photos">North Photos</a></li>
+      <li><a href="#south-photos">South Photos</a></li>
+      <li><a href="#east-photos">East Photos</a></li>
+      <li><a href="#west-photos">West Photos</a></li>
+      <li><a href="#example-4">Example</a></li>
+    </ul></li>
+  </ul></li>
 </ul>
 
 
                     <h2>Submodules</h2>
                     <ul>
                             <li><a href="go_utils/cleanup.html">go_utils.cleanup</a></li>
-                            <li><a href="go_utils/cli.html">go_utils.cli</a></li>
                             <li><a href="go_utils/download.html">go_utils.download</a></li>
                             <li><a href="go_utils/geoenrich.html">go_utils.geoenrich</a></li>
                             <li><a href="go_utils/info.html">go_utils.info</a></li>
@@ -85,6 +137,169 @@ go_utils    </h1>
 <li>Utilities for cleaning up Mosquito Habitat Mapper and Landcover Datasets</li>
 <li>CLI Scripts for downloading data and photos for the Mosquito Habitat Mapper and Landcover Protocols.</li>
 </ul>
+
+<h2 id="example-notebooks">Example Notebooks</h2>
+
+<p><a href="https://github.com/IGES-Geospatial/globe-observer-utils/tree/main/notebooks">Example Notebooks</a> have been made to show basic examples and applications of this library.</p>
+
+<h2 id="cli-script-documentation">CLI Script Documentation</h2>
+
+<p>The CLI Scripts are intended to provide fast and accessible ways of collecting cleaned GLOBE Observer data from the commandline. </p>
+
+<h2 id="getting-globe-data-csvs">Getting GLOBE Data CSVs</h2>
+
+<p>There are two commands that can be used to get data from Mosquito Habitat Mapper and Land Cover, respectively.
+For Mosquito Habitat Mapper, there is <code>mhm-data-download</code> and for Land Cover, there is <code>lc-data-download</code>.</p>
+
+<p>For each of these commands, there are several flags that can be specified to narrow down the data:</p>
+
+<h3 id="general-flags">General Flags</h3>
+
+<h4 id="output-path">Output Path</h4>
+
+<p>You can use <code>--out</code> or <code>-o</code> followed by a file path to specify the output path of the download. If this is not specified, the script will generate diagnostic plots for you to get insight into the data that you would be downloading.</p>
+
+<h4 id="start-and-end-dates">Start and End Dates</h4>
+
+<p>You can use <code>--start</code> or <code>-s</code> followed by a date in YYYY-MM-DD form to specify the start date. Similarly, you can use <code>--end</code> or <code>-e</code> to specify the end date.</p>
+
+<h4 id="countries">Countries</h4>
+
+<p>You can use <code>--countries</code> or <code>-co</code> followed by a list of countries separated by commas to specify a download of specific country data. For example <code>-co "Brazil, Argentina"</code> would only download data from Brazil and Argentina.</p>
+
+<h4 id="regions">Regions</h4>
+
+<p>You can use <code>--regions</code> or <code>-r</code> followed by a list of regions separated by commas to specify a download of specific GLOBE region data. For example <code>-r "North America"</code> would download data from North America. See the region dictionary to see the countries that comprise each GLOBE Region.</p>
+
+<h4 id="bounding-box">Bounding Box</h4>
+
+<p>You can use <code>--box</code> or <code>-b</code> followed by the coordinates of your bounding box in this format: <code>min latitude, min longitude, max latitude, max longitude</code></p>
+
+<h3 id="mosquito-habitat-mapper-flags">Mosquito Habitat Mapper Flags</h3>
+
+<h4 id="genus">Genus</h4>
+
+<p>You can use <code>--hasgenus</code> or <code>-hg</code> to only get data that has an identified genus.</p>
+
+<h4 id="container">Container</h4>
+
+<p>You can use <code>--iscontainer</code> or <code>-ic</code> to only get data which has a container as a watersource.</p>
+
+<h4 id="photo">Photo</h4>
+
+<p>You can use <code>--hasphotos</code> or <code>-hp</code> to only get data which has recorded photo entries.</p>
+
+<h4 id="minimum-larvae-count">Minimum Larvae Count</h4>
+
+<p>You can use <code>--minlarvae</code> or <code>-ml</code> to only get data which has a certain amount of larvae.</p>
+
+<h4 id="example">Example</h4>
+
+<p>The command:</p>
+
+<div class="codehilite"><pre><span></span><code><span class="n">mhm</span><span class="o">-</span><span class="n">download</span> <span class="o">-</span><span class="n">s</span> <span class="s2">&quot;2021-05-01&quot;</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;2021-05-31&quot;</span> <span class="o">-</span><span class="n">hg</span> <span class="o">-</span><span class="n">o</span> <span class="n">MHM_Regular_Test</span><span class="o">.</span><span class="n">csv</span>
+</code></pre></div>
+
+<p>Would download all mosquito mapper data with an identified genus during May 1st, 2021 to May 31st, 2021 into a <code>MHM_Regular_Test.csv</code> file.</p>
+
+<h3 id="land-cover-flags">Land Cover Flags</h3>
+
+<h4 id="has-a-classification">Has a Classification</h4>
+
+<p>You can use <code>--hasclassification</code> or <code>-hc</code> to only get data which has atleast one Land Cover Classification.</p>
+
+<h4 id="has-photo">Has Photo</h4>
+
+<p>You can use <code>--hasphoto</code> or <code>-hp</code> to only get data which has atleast one Photo entry.</p>
+
+<h4 id="has-all-classifications">Has All Classifications</h4>
+
+<p>You can use <code>--hasallclassifications</code> or <code>-hac</code> to only get data which has all classifications filled out. </p>
+
+<h4 id="has-all-photos">Has All Photos</h4>
+
+<p>You can use <code>--hasallphotos</code> or <code>-hap</code> to only get data which has all photos filled out.</p>
+
+<h4 id="example-2">Example</h4>
+
+<p>The command:</p>
+
+<div class="codehilite"><pre><span></span><code><span class="n">lc</span><span class="o">-</span><span class="n">download</span> <span class="o">-</span><span class="n">s</span> <span class="s2">&quot;2021-05-01&quot;</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;2021-05-31&quot;</span> <span class="o">-</span><span class="n">hap</span> <span class="o">-</span><span class="n">o</span> <span class="n">LC_Regular_Test</span><span class="o">.</span><span class="n">csv</span>
+</code></pre></div>
+
+<p>Would download all landcover data with fully filled out photo observations during May 1st, 2021 to May 31st, 2021 into a <code>LC_Regular_Test.csv</code> file.</p>
+
+<h2 id="downloading-photos">Downloading Photos</h2>
+
+<p>There are two commands that can be used to get photos for cleaned Mosquito Habitat Mapper and Land Cover CSV files, respectively.
+For Mosquito Habitat Mapper, there is <code>mhm-photo-download</code> and for Land Cover, there is <code>lc-photo-download</code>.</p>
+
+<h3 id="general-command">General Command</h3>
+
+<p>In order for the photo download scripts to work, you must specify an input path and output path. 
+For example, <code>mhm_photo_download "input csv path" "output directory"</code> will take the Mosquito Habitat Mapper data stored in the input CSV and download the photos to the output directory. If the output directory doesn't exist, it will be created.</p>
+
+<h4 id="all-flag">All Flag</h4>
+
+<p>You can use the <code>--all</code> or <code>-a</code> to set all the following flags.</p>
+
+<h3 id="mosquito-specifics">Mosquito Specifics</h3>
+
+<h4 id="larvae-photos">Larvae Photos</h4>
+
+<p>You can use <code>--larvae</code> or <code>-l</code> to specify the download of larvae photos.</p>
+
+<h4 id="watersource-photos">Watersource Photos</h4>
+
+<p>You can use <code>--watersource</code> or  <code>-w</code> to specify the download of watersource photos.</p>
+
+<h4 id="abdomen-photos">Abdomen Photos</h4>
+
+<p>You can use <code>--abdomen</code> or "-ab" to specify the download of abdomen photos.</p>
+
+<h4 id="example-3">Example</h4>
+
+<p>The command</p>
+
+<div class="codehilite"><pre><span></span><code><span class="n">mhm</span><span class="o">-</span><span class="n">photo</span><span class="o">-</span><span class="n">download</span> <span class="n">mhm_sample</span><span class="o">.</span><span class="n">csv</span> <span class="n">mhm_outdir</span>
+</code></pre></div>
+
+<p>Would download all mosquito mapper photos in the <code>mhm_sample.csv</code> file to a directory named <code>mhm_outdir</code></p>
+
+<h3 id="landcover-specifics">Landcover Specifics</h3>
+
+<h4 id="up-photos">Up Photos</h4>
+
+<p>You can use <code>--up</code> or <code>-u</code> to specify the download of upward photos.</p>
+
+<h4 id="down-photos">Down Photos</h4>
+
+<p>You can use <code>--down</code> or <code>-d</code> to specify the download of downward photos.</p>
+
+<h4 id="north-photos">North Photos</h4>
+
+<p>You can use <code>--north</code> or <code>-n</code> to specify the download of northward photos.</p>
+
+<h4 id="south-photos">South Photos</h4>
+
+<p>You can use <code>--south</code> or <code>-s</code> to specify the download of southward photos.</p>
+
+<h4 id="east-photos">East Photos</h4>
+
+<p>You can use <code>--east</code> or <code>-e</code> to specify the download of eastward photos.</p>
+
+<h4 id="west-photos">West Photos</h4>
+
+<p>You can use <code>--west</code> or <code>-w</code> to specify the download of westward photos.</p>
+
+<h4 id="example-4">Example</h4>
+
+<p>The command:</p>
+
+<div class="codehilite"><pre><span></span><code><span class="n">lc</span><span class="o">-</span><span class="n">photo</span><span class="o">-</span><span class="n">download</span> <span class="n">lc_sample</span><span class="o">.</span><span class="n">csv</span> <span class="n">lc_outdir</span> <span class="o">-</span><span class="n">a</span>
+</code></pre></div>
+
+<p>Would download all landcover photos in the <code>lc_sample.csv</code> file to a directory named <code>lc_outdir</code></p>
 </div>
 
                         <details>
@@ -105,6 +320,135 @@ go_utils    </h1>
 <span class="s2">- Easy downloading of the GLOBE Observer datasets as Pandas DataFrames</span>
 <span class="s2">- Utilities for cleaning up Mosquito Habitat Mapper and Landcover Datasets</span>
 <span class="s2">- CLI Scripts for downloading data and photos for the Mosquito Habitat Mapper and Landcover Protocols.</span>
+
+<span class="s2">Example Notebooks</span>
+<span class="s2">-----------------</span>
+<span class="s2">[Example Notebooks](https://github.com/IGES-Geospatial/globe-observer-utils/tree/main/notebooks) have been made to show basic examples and applications of this library.</span>
+
+<span class="s2">CLI Script Documentation</span>
+<span class="s2">-----------</span>
+
+<span class="s2">The CLI Scripts are intended to provide fast and accessible ways of collecting cleaned GLOBE Observer data from the commandline. </span>
+
+<span class="s2">## Getting GLOBE Data CSVs</span>
+<span class="s2">There are two commands that can be used to get data from Mosquito Habitat Mapper and Land Cover, respectively.</span>
+<span class="s2">For Mosquito Habitat Mapper, there is `mhm-data-download` and for Land Cover, there is `lc-data-download`.</span>
+
+<span class="s2">For each of these commands, there are several flags that can be specified to narrow down the data:</span>
+<span class="s2">### General Flags</span>
+
+<span class="s2">#### Output Path</span>
+<span class="s2">You can use `--out` or `-o` followed by a file path to specify the output path of the download. If this is not specified, the script will generate diagnostic plots for you to get insight into the data that you would be downloading.</span>
+
+<span class="s2">#### Start and End Dates</span>
+<span class="s2">You can use `--start` or `-s` followed by a date in YYYY-MM-DD form to specify the start date. Similarly, you can use `--end` or `-e` to specify the end date.</span>
+
+<span class="s2">#### Countries</span>
+<span class="s2">You can use `--countries` or `-co` followed by a list of countries separated by commas to specify a download of specific country data. For example `-co &quot;Brazil, Argentina&quot;` would only download data from Brazil and Argentina.</span>
+
+<span class="s2">#### Regions</span>
+<span class="s2">You can use `--regions` or `-r` followed by a list of regions separated by commas to specify a download of specific GLOBE region data. For example `-r &quot;North America&quot;` would download data from North America. See the region dictionary to see the countries that comprise each GLOBE Region.</span>
+
+<span class="s2">#### Bounding Box</span>
+<span class="s2">You can use `--box` or `-b` followed by the coordinates of your bounding box in this format: `min latitude, min longitude, max latitude, max longitude`</span>
+
+<span class="s2">### Mosquito Habitat Mapper Flags</span>
+
+<span class="s2">#### Genus</span>
+<span class="s2">You can use `--hasgenus` or `-hg` to only get data that has an identified genus.</span>
+
+<span class="s2">#### Container</span>
+<span class="s2">You can use `--iscontainer` or `-ic` to only get data which has a container as a watersource.</span>
+
+<span class="s2">#### Photo</span>
+<span class="s2">You can use `--hasphotos` or `-hp` to only get data which has recorded photo entries.</span>
+
+<span class="s2">#### Minimum Larvae Count</span>
+<span class="s2">You can use `--minlarvae` or `-ml` to only get data which has a certain amount of larvae.</span>
+
+<span class="s2">#### Example</span>
+<span class="s2">The command:</span>
+<span class="s2">```py</span>
+<span class="s2">mhm-download -s &quot;2021-05-01&quot; -e &quot;2021-05-31&quot; -hg -o MHM_Regular_Test.csv</span>
+<span class="s2">```</span>
+
+<span class="s2">Would download all mosquito mapper data with an identified genus during May 1st, 2021 to May 31st, 2021 into a `MHM_Regular_Test.csv` file.</span>
+<span class="s2">### Land Cover Flags</span>
+
+<span class="s2">#### Has a Classification</span>
+<span class="s2">You can use `--hasclassification` or `-hc` to only get data which has atleast one Land Cover Classification.</span>
+
+<span class="s2">#### Has Photo</span>
+<span class="s2">You can use `--hasphoto` or `-hp` to only get data which has atleast one Photo entry.</span>
+
+<span class="s2">#### Has All Classifications</span>
+<span class="s2">You can use `--hasallclassifications` or `-hac` to only get data which has all classifications filled out. </span>
+
+<span class="s2">#### Has All Photos</span>
+<span class="s2">You can use `--hasallphotos` or `-hap` to only get data which has all photos filled out.</span>
+
+<span class="s2">#### Example</span>
+<span class="s2">The command:</span>
+<span class="s2">```py</span>
+<span class="s2">lc-download -s &quot;2021-05-01&quot; -e &quot;2021-05-31&quot; -hap -o LC_Regular_Test.csv</span>
+<span class="s2">```</span>
+
+<span class="s2">Would download all landcover data with fully filled out photo observations during May 1st, 2021 to May 31st, 2021 into a `LC_Regular_Test.csv` file.</span>
+
+<span class="s2">## Downloading Photos</span>
+<span class="s2">There are two commands that can be used to get photos for cleaned Mosquito Habitat Mapper and Land Cover CSV files, respectively.</span>
+<span class="s2">For Mosquito Habitat Mapper, there is `mhm-photo-download` and for Land Cover, there is `lc-photo-download`.</span>
+
+<span class="s2">### General Command</span>
+<span class="s2">In order for the photo download scripts to work, you must specify an input path and output path. </span>
+<span class="s2">For example, `mhm_photo_download &quot;input csv path&quot; &quot;output directory&quot;` will take the Mosquito Habitat Mapper data stored in the input CSV and download the photos to the output directory. If the output directory doesn&#39;t exist, it will be created.</span>
+
+<span class="s2">#### All Flag</span>
+<span class="s2">You can use the `--all` or `-a` to set all the following flags.</span>
+
+<span class="s2">### Mosquito Specifics</span>
+
+<span class="s2">#### Larvae Photos</span>
+<span class="s2">You can use `--larvae` or `-l` to specify the download of larvae photos.</span>
+
+<span class="s2">#### Watersource Photos</span>
+<span class="s2">You can use `--watersource` or  `-w` to specify the download of watersource photos.</span>
+
+<span class="s2">#### Abdomen Photos</span>
+<span class="s2">You can use `--abdomen` or &quot;-ab&quot; to specify the download of abdomen photos.</span>
+
+<span class="s2">#### Example</span>
+<span class="s2">The command</span>
+<span class="s2">```py</span>
+<span class="s2">mhm-photo-download mhm_sample.csv mhm_outdir</span>
+<span class="s2">```</span>
+<span class="s2">Would download all mosquito mapper photos in the `mhm_sample.csv` file to a directory named `mhm_outdir`</span>
+<span class="s2">### Landcover Specifics</span>
+
+<span class="s2">#### Up Photos</span>
+<span class="s2">You can use `--up` or `-u` to specify the download of upward photos.</span>
+
+<span class="s2">#### Down Photos</span>
+<span class="s2">You can use `--down` or `-d` to specify the download of downward photos.</span>
+
+<span class="s2">#### North Photos</span>
+<span class="s2">You can use `--north` or `-n` to specify the download of northward photos.</span>
+
+<span class="s2">#### South Photos</span>
+<span class="s2">You can use `--south` or `-s` to specify the download of southward photos.</span>
+
+<span class="s2">#### East Photos</span>
+<span class="s2">You can use `--east` or `-e` to specify the download of eastward photos.</span>
+
+<span class="s2">#### West Photos</span>
+<span class="s2">You can use `--west` or `-w` to specify the download of westward photos.</span>
+
+<span class="s2">#### Example</span>
+<span class="s2">The command:</span>
+<span class="s2">```py</span>
+<span class="s2">lc-photo-download lc_sample.csv lc_outdir -a</span>
+<span class="s2">```</span>
+<span class="s2">Would download all landcover photos in the `lc_sample.csv` file to a directory named `lc_outdir`</span>
 <span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
