@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="pdoc 8.1.0" />
-    <title>go_utils.geoenrich API documentation</title>
+    <title>go_utils.constants API documentation</title>
     <link rel="" type="" href=""/>
 
     <script>
@@ -40,14 +40,12 @@
                         <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                                pattern=".+" required>
 
+                    <h2>Contents</h2>
+                    <ul>
+  <li><a href="#stored-values">Stored Values</a></li>
+</ul>
 
 
-                    <h2>API Documentation</h2>
-                        <ul class="memberlist">
-            <li>
-                    <a class="function" href="#get_country_api_data">get_country_api_data</a>
-            </li>
-    </ul>
 
 
 
@@ -61,237 +59,187 @@
     <main class="pdoc">
             <section>
                     <h1 class="modulename">
-<a href="./../go_utils.html">go_utils</a><wbr>.geoenrich    </h1>
+<a href="./../go_utils.html">go_utils</a><wbr>.constants    </h1>
 
-                
+                        <div class="docstring"><p>Useful stored values for GLOBE Observer scripts</p>
+
+<h6 id="stored-values">Stored Values</h6>
+
+<ul>
+<li>mosquito_protocol: the string used in the GLOBE API for the Mosquito Habitat Mapper protocol</li>
+<li>landcover_protocol: the string used in the GLOBE API for the Land Cover Protocol.</li>
+<li>start_date: the default starting date of GLOBE Obsever data requests in YYYY-MM-DD Form.</li>
+<li>end_date: the current date in YYYY-MM-DD Form.</li>
+<li>regions_dict: contains all the different GLOBE regions and the countries associated with each region</li>
+</ul>
+</div>
+
                         <details>
             <summary>View Source</summary>
             <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">arcgis.features</span> <span class="kn">import</span> <span class="n">GeoAccessor</span>
-<span class="kn">from</span> <span class="nn">arcgis.gis</span> <span class="kn">import</span> <span class="n">GIS</span>
+<span class="c1"># Default Start and End Dates for GO Data</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s2">&quot;2017-05-31&quot;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">go_utils.download</span> <span class="kn">import</span> <span class="n">convert_dates_to_datetime</span><span class="p">,</span> <span class="n">default_data_clean</span>
+<span class="n">mosquito_protocol</span> <span class="o">=</span> <span class="s2">&quot;mosquito_habitat_mapper&quot;</span>
+<span class="n">landcover_protocol</span> <span class="o">=</span> <span class="s2">&quot;land_covers&quot;</span>
 
-<span class="kn">from</span> <span class="nn">go_utils.constants</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># isort: skip</span>
-    <span class="n">mosquito_protocol</span><span class="p">,</span>
-    <span class="n">landcover_protocol</span><span class="p">,</span>
-    <span class="n">start_date</span><span class="p">,</span>
-    <span class="n">end_date</span><span class="p">,</span>
-    <span class="n">region_dict</span><span class="p">,</span>
-    <span class="n">abbreviation_dict</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="n">region_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Africa&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Benin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Botswana&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Burkina Faso&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Cameroon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Cape Verde&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Chad&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Congo DRC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ethiopia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Gabon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Gambia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ghana&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Guinea&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Kenya&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Liberia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Madagascar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Mali&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Mauritius&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Namibia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Niger&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Nigeria&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Rwada&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Senegal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Seychelles&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;South Africa&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Tanzania&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Togo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Uganda&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Asia and the Pacific&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Australia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Bangladesh&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Fiji&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;India&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Japan&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Maldives&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Marshall Islands&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Micronesia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Mongolia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Nepal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;New Zealand&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Palau&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Philippines&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Republic of Korea&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Sri Lanka&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Taiwan Partnership&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Thailand&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Vietnam&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Latin America and Caribbean&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Argentina&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Bahamas&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Burmuda&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Bolivia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Brazil&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Chile&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Colombia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Costa Rica&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Dominican Republic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ecuador&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;El Salvador&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Guatemala&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Honduras&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Mexico&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Panama&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Paraguay&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Peru&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Suriname&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Trinidad and Tobago&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Uruguay&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Europe and Eurasia&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Austria&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Belgium&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Bulgaria&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Croatia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Cyprus&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Czech Republic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Denmark&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Estonia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Finland&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;France&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Georgia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Germany&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Greece&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Hungary&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Iceland&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ireland&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Israel&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Italy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Kazakhstan&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Kyrgyz Republic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Latvia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Liechtenstein&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Lithuania&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Luxembourg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Malta&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Moldovia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Montenegro&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Netherlands&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;North Macedonia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Norway&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Poland&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Portugal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Romania&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Russia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Serbia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Slovak Republic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Spain&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Sweden&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Switzerland&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Turkey&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ukraine&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;United Kingdom&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Near East and North Africa&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Bahrain&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Egypt&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Jordan&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Kuwait&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Lebanon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Mauritania&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Morocco&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Oman&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Pakistan&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Qatar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Saudi Arabia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Tunisia&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;United Arab Emirates&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;North America&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Canada&quot;</span><span class="p">,</span> <span class="s2">&quot;United States&quot;</span><span class="p">],</span>
+<span class="p">}</span>
 
+<span class="n">abbreviation_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">mosquito_protocol</span><span class="p">:</span> <span class="s2">&quot;mhm&quot;</span><span class="p">,</span>
+    <span class="n">landcover_protocol</span><span class="p">:</span> <span class="s2">&quot;lc&quot;</span><span class="p">,</span>
+<span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">get_country_api_data</span><span class="p">(</span>
-    <span class="n">protocol</span><span class="p">,</span>
-    <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
-    <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-    <span class="n">is_clean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">countries</span><span class="o">=</span><span class="p">[],</span>
-    <span class="n">regions</span><span class="o">=</span><span class="p">[],</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gets country enriched API Data. Due note that this data comes from layers in ArcGIS that are updated daily. Therefore, there will be some delay between when an entry is uploaded onto the GLOBE data base and being on the ArcGIS dataset.</span>
+<span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Useful stored values for GLOBE Observer scripts</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    protocol : str, {&quot;mosquito_habitat_mapper&quot;, &quot;land_covers&quot;}</span>
-<span class="sd">        The desired GLOBE Observer Protocol. Currently only mosquito habitat mapper and land cover is supported.</span>
-<span class="sd">    start_date : str, default= 2017-05-31</span>
-<span class="sd">        The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
-<span class="sd">        The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    countries : list of str, default=[]</span>
-<span class="sd">        The list of desired countries. Look at go_utils.info.region_dict to see supported country names. If the list is empty, all data will be included.</span>
-<span class="sd">    regions : list of str, default=[]</span>
-<span class="sd">        The list of desired regions. Look at go_utils.info.region_dict to see supported region names and the countries they enclose. If the list is empty, all data will be included.</span>
-<span class="sd">    latlon_box : dict of {str, double}, optional</span>
-<span class="sd">        The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">item_id_dict</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">mosquito_protocol</span><span class="p">:</span> <span class="s2">&quot;8bc5b0ac24d3474e9ab6ce2bfb4f37fe&quot;</span><span class="p">,</span>
-        <span class="n">landcover_protocol</span><span class="p">:</span> <span class="s2">&quot;c68acbfc68db4409b495fd4636646aa6&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_id_dict</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Invalid protocol, currently only &#39;mosquito_habitat_mapper&#39; and &#39;land_covers&#39; are supported.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="n">gis</span> <span class="o">=</span> <span class="n">GIS</span><span class="p">()</span>
-    <span class="n">item</span> <span class="o">=</span> <span class="n">gis</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">itemid</span><span class="o">=</span><span class="n">item_id_dict</span><span class="p">[</span><span class="n">protocol</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">GeoAccessor</span><span class="o">.</span><span class="n">from_layer</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-    <span class="k">if</span> <span class="s2">&quot;SHAPE&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;SHAPE&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># Due to the size of the mhm column names, ArcGIS truncates the names so it must be renamed in this step.</span>
-    <span class="k">if</span> <span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span>
-
-        <span class="n">mhm_rename_dict</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">col</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;mosquitohabitatmapper</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
-            <span class="k">if</span> <span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">col</span> <span class="o">!=</span> <span class="s2">&quot;COUNTRY&quot;</span>
-        <span class="p">}</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
-            <span class="n">mhm_rename_dict</span><span class="p">,</span>
-            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="p">)</span>
-
-    <span class="c1"># Filter the dates</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">measured_at</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;MeasuredAt&quot;</span>
-
-    <span class="n">convert_dates_to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)]</span>
-
-    <span class="k">if</span> <span class="n">is_clean</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">countries</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">regions</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">df</span>
-
-
-<span class="k">def</span> <span class="nf">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">country_list</span><span class="p">):</span>
-    <span class="n">country_filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">country_col</span><span class="p">:</span> <span class="n">country_col</span> <span class="ow">in</span> <span class="n">country_list</span><span class="p">)</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">country_filter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">abbreviation_dict</span><span class="p">[</span><span class="n">protocol</span><span class="p">]</span><span class="si">}</span><span class="s2">_COUNTRY&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="s2">Stored Values</span>
+<span class="s2">-------------</span>
+<span class="s2">- mosquito_protocol: the string used in the GLOBE API for the Mosquito Habitat Mapper protocol</span>
+<span class="s2">- landcover_protocol: the string used in the GLOBE API for the Land Cover Protocol.</span>
+<span class="s2">- start_date: the default starting date of GLOBE Obsever data requests in YYYY-MM-DD Form.</span>
+<span class="s2">- end_date: the current date in YYYY-MM-DD Form.</span>
+<span class="s2">- regions_dict: contains all the different GLOBE regions and the countries associated with each region</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
         </details>
 
             </section>
-                <section id="get_country_api_data">
-                            <div class="attr function"><a class="headerlink" href="#get_country_api_data">#&nbsp;&nbsp</a>
-
-        
-            <span class="def">def</span>
-            <span class="name">get_country_api_data</span><span class="signature">(
-    protocol,
-    start_date=&#39;2017-05-31&#39;,
-    end_date=&#39;2021-12-31&#39;,
-    is_clean=True,
-    countries=[],
-    regions=[]
-)</span>:
-    </div>
-
-                <details>
-            <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_country_api_data</span><span class="p">(</span>
-    <span class="n">protocol</span><span class="p">,</span>
-    <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
-    <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
-    <span class="n">is_clean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">countries</span><span class="o">=</span><span class="p">[],</span>
-    <span class="n">regions</span><span class="o">=</span><span class="p">[],</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gets country enriched API Data. Due note that this data comes from layers in ArcGIS that are updated daily. Therefore, there will be some delay between when an entry is uploaded onto the GLOBE data base and being on the ArcGIS dataset.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    protocol : str, {&quot;mosquito_habitat_mapper&quot;, &quot;land_covers&quot;}</span>
-<span class="sd">        The desired GLOBE Observer Protocol. Currently only mosquito habitat mapper and land cover is supported.</span>
-<span class="sd">    start_date : str, default= 2017-05-31</span>
-<span class="sd">        The desired start date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    end_date : str, default= today&#39;s date in YYYY-MM-DD form.</span>
-<span class="sd">        The desired end date of the dataset in the format of (YYYY-MM-DD).</span>
-<span class="sd">    countries : list of str, default=[]</span>
-<span class="sd">        The list of desired countries. Look at go_utils.info.region_dict to see supported country names. If the list is empty, all data will be included.</span>
-<span class="sd">    regions : list of str, default=[]</span>
-<span class="sd">        The list of desired regions. Look at go_utils.info.region_dict to see supported region names and the countries they enclose. If the list is empty, all data will be included.</span>
-<span class="sd">    latlon_box : dict of {str, double}, optional</span>
-<span class="sd">        The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: &quot;min_lat&quot;, &quot;min_lon&quot;, &quot;max_lat&quot;, &quot;max_lon&quot;. The default value specifies all latitude and longitude coordinates.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">item_id_dict</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">mosquito_protocol</span><span class="p">:</span> <span class="s2">&quot;8bc5b0ac24d3474e9ab6ce2bfb4f37fe&quot;</span><span class="p">,</span>
-        <span class="n">landcover_protocol</span><span class="p">:</span> <span class="s2">&quot;c68acbfc68db4409b495fd4636646aa6&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_id_dict</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Invalid protocol, currently only &#39;mosquito_habitat_mapper&#39; and &#39;land_covers&#39; are supported.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="n">gis</span> <span class="o">=</span> <span class="n">GIS</span><span class="p">()</span>
-    <span class="n">item</span> <span class="o">=</span> <span class="n">gis</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">itemid</span><span class="o">=</span><span class="n">item_id_dict</span><span class="p">[</span><span class="n">protocol</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">GeoAccessor</span><span class="o">.</span><span class="n">from_layer</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-    <span class="k">if</span> <span class="s2">&quot;SHAPE&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;SHAPE&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># Due to the size of the mhm column names, ArcGIS truncates the names so it must be renamed in this step.</span>
-    <span class="k">if</span> <span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;mosquito_habitat_mapper&quot;</span><span class="p">:</span>
-
-        <span class="n">mhm_rename_dict</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">col</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;mosquitohabitatmapper</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
-            <span class="k">if</span> <span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">col</span> <span class="o">!=</span> <span class="s2">&quot;COUNTRY&quot;</span>
-        <span class="p">}</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
-            <span class="n">mhm_rename_dict</span><span class="p">,</span>
-            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="p">)</span>
-
-    <span class="c1"># Filter the dates</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">measured_at</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;MeasuredAt&quot;</span>
-
-    <span class="n">convert_dates_to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">measured_at</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)]</span>
-
-    <span class="k">if</span> <span class="n">is_clean</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">countries</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">regions</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">_get_valid_countries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">df</span>
-</pre></div>
-
-        </details>
-
-            <div class="docstring"><p>Gets country enriched API Data. Due note that this data comes from layers in ArcGIS that are updated daily. Therefore, there will be some delay between when an entry is uploaded onto the GLOBE data base and being on the ArcGIS dataset.</p>
-
-<h6 id="parameters">Parameters</h6>
-
-<ul>
-<li><strong>protocol</strong> (str, {"mosquito_habitat_mapper", "land_covers"}):
-The desired GLOBE Observer Protocol. Currently only mosquito habitat mapper and land cover is supported.</li>
-<li><strong>start_date</strong> (str, default= 2017-05-31):
-The desired start date of the dataset in the format of (YYYY-MM-DD).</li>
-<li><strong>end_date</strong> (str, default= today's date in YYYY-MM-DD form.):
-The desired end date of the dataset in the format of (YYYY-MM-DD).</li>
-<li><strong>countries</strong> (list of str, default=[]):
-The list of desired countries. Look at <a href="../go_utils.html#info.region_dict">go_utils.info.region_dict</a> to see supported country names. If the list is empty, all data will be included.</li>
-<li><strong>regions</strong> (list of str, default=[]):
-The list of desired regions. Look at <a href="../go_utils.html#info.region_dict">go_utils.info.region_dict</a> to see supported region names and the countries they enclose. If the list is empty, all data will be included.</li>
-<li><strong>latlon_box</strong> (dict of {str, double}, optional):
-The longitudes and latitudes of a bounding box for the dataset. The minimum/maximum latitudes and longitudes must be specified with the following keys: "min_lat", "min_lon", "max_lat", "max_lon". The default value specifies all latitude and longitude coordinates.</li>
-</ul>
-</div>
-
-
-                </section>
     </main>
 <script>
     function escapeHTML(html) {
