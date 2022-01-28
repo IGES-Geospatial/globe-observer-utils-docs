@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="pdoc 8.1.0" />
+    <meta name="generator" content="pdoc 9.0.1" />
     <title>go_utils.photo_download API documentation</title>
     <link rel="" type="" href=""/>
 
@@ -21,13 +21,13 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<style>/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
+<style>None/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
 <style>/*! pygments syntax highlighting */pre{line-height:125%;}td.linenos pre{color:#000000; background-color:#f0f0f0; padding-left:5px; padding-right:5px;}span.linenos{color:#000000; background-color:#f0f0f0; padding-left:5px; padding-right:5px;}td.linenos pre.special{color:#000000; background-color:#ffffc0; padding-left:5px; padding-right:5px;}span.linenos.special{color:#000000; background-color:#ffffc0; padding-left:5px; padding-right:5px;}.pdoc .hll{background-color:#ffffcc}.pdoc{background:#f8f8f8;}.pdoc .c{color:#408080; font-style:italic}.pdoc .err{border:1px solid #FF0000}.pdoc .k{color:#008000; font-weight:bold}.pdoc .o{color:#666666}.pdoc .ch{color:#408080; font-style:italic}.pdoc .cm{color:#408080; font-style:italic}.pdoc .cp{color:#BC7A00}.pdoc .cpf{color:#408080; font-style:italic}.pdoc .c1{color:#408080; font-style:italic}.pdoc .cs{color:#408080; font-style:italic}.pdoc .gd{color:#A00000}.pdoc .ge{font-style:italic}.pdoc .gr{color:#FF0000}.pdoc .gh{color:#000080; font-weight:bold}.pdoc .gi{color:#00A000}.pdoc .go{color:#888888}.pdoc .gp{color:#000080; font-weight:bold}.pdoc .gs{font-weight:bold}.pdoc .gu{color:#800080; font-weight:bold}.pdoc .gt{color:#0044DD}.pdoc .kc{color:#008000; font-weight:bold}.pdoc .kd{color:#008000; font-weight:bold}.pdoc .kn{color:#008000; font-weight:bold}.pdoc .kp{color:#008000}.pdoc .kr{color:#008000; font-weight:bold}.pdoc .kt{color:#B00040}.pdoc .m{color:#666666}.pdoc .s{color:#BA2121}.pdoc .na{color:#7D9029}.pdoc .nb{color:#008000}.pdoc .nc{color:#0000FF; font-weight:bold}.pdoc .no{color:#880000}.pdoc .nd{color:#AA22FF}.pdoc .ni{color:#999999; font-weight:bold}.pdoc .ne{color:#D2413A; font-weight:bold}.pdoc .nf{color:#0000FF}.pdoc .nl{color:#A0A000}.pdoc .nn{color:#0000FF; font-weight:bold}.pdoc .nt{color:#008000; font-weight:bold}.pdoc .nv{color:#19177C}.pdoc .ow{color:#AA22FF; font-weight:bold}.pdoc .w{color:#bbbbbb}.pdoc .mb{color:#666666}.pdoc .mf{color:#666666}.pdoc .mh{color:#666666}.pdoc .mi{color:#666666}.pdoc .mo{color:#666666}.pdoc .sa{color:#BA2121}.pdoc .sb{color:#BA2121}.pdoc .sc{color:#BA2121}.pdoc .dl{color:#BA2121}.pdoc .sd{color:#BA2121; font-style:italic}.pdoc .s2{color:#BA2121}.pdoc .se{color:#BB6622; font-weight:bold}.pdoc .sh{color:#BA2121}.pdoc .si{color:#BB6688; font-weight:bold}.pdoc .sx{color:#008000}.pdoc .sr{color:#BB6688}.pdoc .s1{color:#BA2121}.pdoc .ss{color:#19177C}.pdoc .bp{color:#008000}.pdoc .fm{color:#0000FF}.pdoc .vc{color:#19177C}.pdoc .vg{color:#19177C}.pdoc .vi{color:#19177C}.pdoc .vm{color:#19177C}.pdoc .il{color:#666666}</style>
-<style>/*! pdoc */:root{--pdoc-background:#fff;}.pdoc{--text:#212529;--muted:#6c757d;--link:#3660a5;--link-hover:#1659c5;--code:#f7f7f7;--active:#fff598;--accent:#eee;--accent2:#c1c1c1;--nav-hover:rgba(255, 255, 255, 0.5);--name:#0066BB;--def:#008800;--annotation:#007020;}body{background-color:var(--pdoc-background);}html, body{width:100%;height:100%;}@media (max-width:769px){#navtoggle{cursor:pointer;position:absolute;width:50px;height:40px;top:1rem;right:1rem;border-color:var(--text);color:var(--text);display:flex;opacity:0.8;}#navtoggle:hover{opacity:1;}#togglestate + div{display:none;}#togglestate:checked + div{display:inherit;}main, header{padding:2rem 3vw;}.git-button{display:none !important;}nav input[type="search"]:valid ~ *{display:none !important;}}@media (min-width:770px){:root{--sidebar-width:clamp(12.5rem, 28vw, 22rem);}nav{position:fixed;overflow:auto;height:100vh;width:var(--sidebar-width);}main, header{padding:3rem 2rem 3rem calc(var(--sidebar-width) + 3rem);width:calc(54rem + var(--sidebar-width));max-width:100%;}#navtoggle{display:none;}}#togglestate{display:none;}nav.pdoc{--pad:1.75rem;--indent:1.5rem;background-color:var(--accent);border-right:1px solid var(--accent2);box-shadow:0 0 20px rgba(50, 50, 50, .2) inset;padding:0 0 0 var(--pad);overflow-wrap:anywhere;scrollbar-width:thin; scrollbar-color:var(--accent2) transparent }nav.pdoc::-webkit-scrollbar{width:.4rem; }nav.pdoc::-webkit-scrollbar-thumb{background-color:var(--accent2); }nav.pdoc > div{padding:var(--pad) 0;}nav.pdoc .module-list-button{display:inline-flex;align-items:center;color:var(--text);border-color:var(--muted);margin-bottom:1rem;}nav.pdoc .module-list-button:hover{border-color:var(--text);}nav.pdoc input[type=search]{display:block;outline-offset:0;width:calc(100% - var(--pad));}nav.pdoc .logo{max-width:calc(100% - var(--pad));max-height:35vh;display:block;margin:0 auto 1rem;transform:translate(calc(-.5 * var(--pad)), 0);}nav.pdoc ul{list-style:none;padding-left:0;}nav.pdoc li{display:block;margin:0;padding:.2rem 0 .2rem var(--indent);transition:all 100ms;}nav.pdoc > div > ul > li{padding-left:0;}nav.pdoc li:hover{background-color:var(--nav-hover);}nav.pdoc a, nav.pdoc a:hover{color:var(--text);}nav.pdoc a{display:block;}nav.pdoc > h2:first-of-type{margin-top:1.5rem;}nav.pdoc .class:before{content:"class ";color:var(--muted);}nav.pdoc .function:after{content:"()";color:var(--muted);}nav.pdoc footer:before{content:"";display:block;width:calc(100% - var(--pad));border-top:solid var(--accent2) 1px;margin-top:1.5rem;padding-top:.5rem;}nav.pdoc footer{font-size:small;}html, main{scroll-behavior:smooth;}.pdoc{color:var(--text);box-sizing:border-box;line-height:1.5;background:none;}.pdoc .pdoc-button{display:inline-block;border:solid black 1px;border-radius:2px;font-size:.75rem;padding:calc(0.5em - 1px) 1em;transition:100ms all;}.pdoc .visually-hidden{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0, 0, 0, 0) !important;white-space:nowrap !important;border:0 !important;}.pdoc h1, .pdoc h2, .pdoc h3{font-weight:300;margin:.3em 0;padding:.2em 0;}.pdoc a{text-decoration:none;color:var(--link);}.pdoc a:hover{color:var(--link-hover);}.pdoc blockquote{margin-left:2rem;}.pdoc pre{background-color:var(--code);border-top:1px solid var(--accent2);border-bottom:1px solid var(--accent2);margin-bottom:1em;padding:.5rem 0 .5rem .5rem;overflow-x:auto;}.pdoc code{color:var(--text);padding:.2em .4em;margin:0;font-size:85%;background-color:var(--code);border-radius:6px;}.pdoc a > code{color:inherit;}.pdoc pre > code{display:inline-block;font-size:inherit;background:none;border:none;padding:0;}.pdoc .modulename{margin-top:0;font-weight:bold;}.pdoc .modulename a{color:var(--link);transition:100ms all;}.pdoc .git-button{float:right;border:solid var(--link) 1px;}.pdoc .git-button:hover{background-color:var(--link);color:var(--pdoc-background);}.pdoc details{--shift:-40px;text-align:right;margin-top:var(--shift);margin-bottom:calc(0px - var(--shift));clear:both;filter:opacity(1);}.pdoc details:not([open]){height:0;overflow:visible;}.pdoc details > summary{font-size:.75rem;cursor:pointer;color:var(--muted);border-width:0;padding:0 .7em;display:inline-block;display:inline list-item;user-select:none;}.pdoc details > summary:focus{outline:0;}.pdoc details > div{margin-top:calc(0px - var(--shift) / 2);text-align:left;}.pdoc .docstring{margin-bottom:1.5rem;}.pdoc > section:first-of-type > .docstring{margin-bottom:3rem;}.pdoc .docstring pre{margin-left:1em;margin-right:1em;}.pdoc h1:target,.pdoc h2:target,.pdoc h3:target,.pdoc h4:target,.pdoc h5:target,.pdoc h6:target{background-color:var(--active);box-shadow:-1rem 0 0 0 var(--active);}.pdoc div:target > .attr,.pdoc section:target > .attr,.pdoc dd:target > a{background-color:var(--active);}.pdoc .attr:hover{filter:contrast(0.95);}.pdoc .headerlink{position:absolute;width:0;margin-left:-1.5rem;line-height:1.4rem;font-size:1.5rem;font-weight:normal;transition:all 100ms ease-in-out;opacity:0;}.pdoc .attr > .headerlink{margin-left:-2.5rem;}.pdoc *:hover > .headerlink,.pdoc *:target > .attr > .headerlink{opacity:1;}.pdoc .attr{display:block;color:var(--text);margin:1rem 0 .5rem;padding:.4rem 5rem .4rem 1rem;background-color:var(--accent);}.pdoc .classattr{margin-left:2rem;}.pdoc .name{color:var(--name);font-weight:bold;}.pdoc .def{color:var(--def);font-weight:bold;}.pdoc .signature{white-space:pre-wrap;}.pdoc .annotation{color:var(--annotation);}.pdoc .inherited{margin-left:2rem;}.pdoc .inherited dt{font-weight:700;}.pdoc .inherited dt, .pdoc .inherited dd{display:inline;margin-left:0;margin-bottom:.5rem;}.pdoc .inherited dd:not(:last-child):after{content:", ";}.pdoc .inherited .class:before{content:"class ";}.pdoc .inherited .function a:after{content:"()";}.pdoc .search-result .docstring{overflow:auto;max-height:25vh;}.pdoc .search-result.focused > .attr{background-color:var(--active);}.pdoc .attribution{margin-top:2rem;display:block;opacity:0.5;transition:all 200ms;filter:grayscale(100%);}.pdoc .attribution:hover{opacity:1;filter:grayscale(0%);}.pdoc .attribution img{margin-left:5px;height:35px;vertical-align:middle;width:70px;transition:all 200ms;}.pdoc table{display:block;width:max-content;max-width:100%;overflow:auto;margin-bottom:1rem;}.pdoc table th{font-weight:600;}.pdoc table th, .pdoc table td{padding:6px 13px;border:1px solid var(--accent2);}</style>
+<style>/*! pdoc */:root{--pdoc-background:#fff;}.pdoc{--text:#212529;--muted:#6c757d;--link:#3660a5;--link-hover:#1659c5;--code:#f7f7f7;--active:#fff598;--accent:#eee;--accent2:#c1c1c1;--nav-hover:rgba(255, 255, 255, 0.5);--name:#0066BB;--def:#008800;--annotation:#007020;}body{background-color:var(--pdoc-background);}html, body{width:100%;height:100%;}@media (max-width:769px){#navtoggle{cursor:pointer;position:absolute;width:50px;height:40px;top:1rem;right:1rem;border-color:var(--text);color:var(--text);display:flex;opacity:0.8;}#navtoggle:hover{opacity:1;}#togglestate + div{display:none;}#togglestate:checked + div{display:inherit;}main, header{padding:2rem 3vw;}.git-button{display:none !important;}nav input[type="search"]{max-width:77%;}nav input[type="search"]:first-child{margin-top:-6px;}nav input[type="search"]:valid ~ *{display:none !important;}}@media (min-width:770px){:root{--sidebar-width:clamp(12.5rem, 28vw, 22rem);}nav{position:fixed;overflow:auto;height:100vh;width:var(--sidebar-width);}main, header{padding:3rem 2rem 3rem calc(var(--sidebar-width) + 3rem);width:calc(54rem + var(--sidebar-width));max-width:100%;}#navtoggle{display:none;}}#togglestate{position:absolute;height:0;}nav.pdoc{--pad:1.75rem;--indent:1.5rem;background-color:var(--accent);border-right:1px solid var(--accent2);box-shadow:0 0 20px rgba(50, 50, 50, .2) inset;padding:0 0 0 var(--pad);overflow-wrap:anywhere;scrollbar-width:thin; scrollbar-color:var(--accent2) transparent }nav.pdoc::-webkit-scrollbar{width:.4rem; }nav.pdoc::-webkit-scrollbar-thumb{background-color:var(--accent2); }nav.pdoc > div{padding:var(--pad) 0;}nav.pdoc .module-list-button{display:inline-flex;align-items:center;color:var(--text);border-color:var(--muted);margin-bottom:1rem;}nav.pdoc .module-list-button:hover{border-color:var(--text);}nav.pdoc input[type=search]{display:block;outline-offset:0;width:calc(100% - var(--pad));}nav.pdoc .logo{max-width:calc(100% - var(--pad));max-height:35vh;display:block;margin:0 auto 1rem;transform:translate(calc(-.5 * var(--pad)), 0);}nav.pdoc ul{list-style:none;padding-left:0;}nav.pdoc li{display:block;margin:0;padding:.2rem 0 .2rem var(--indent);transition:all 100ms;}nav.pdoc > div > ul > li{padding-left:0;}nav.pdoc li:hover{background-color:var(--nav-hover);}nav.pdoc a, nav.pdoc a:hover{color:var(--text);}nav.pdoc a{display:block;}nav.pdoc > h2:first-of-type{margin-top:1.5rem;}nav.pdoc .class:before{content:"class ";color:var(--muted);}nav.pdoc .function:after{content:"()";color:var(--muted);}nav.pdoc footer:before{content:"";display:block;width:calc(100% - var(--pad));border-top:solid var(--accent2) 1px;margin-top:1.5rem;padding-top:.5rem;}nav.pdoc footer{font-size:small;}html, main{scroll-behavior:smooth;}.pdoc{color:var(--text);box-sizing:border-box;line-height:1.5;background:none;}.pdoc .pdoc-button{display:inline-block;border:solid black 1px;border-radius:2px;font-size:.75rem;padding:calc(0.5em - 1px) 1em;transition:100ms all;}.pdoc .visually-hidden{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0, 0, 0, 0) !important;white-space:nowrap !important;border:0 !important;}.pdoc h1, .pdoc h2, .pdoc h3{font-weight:300;margin:.3em 0;padding:.2em 0;}.pdoc a{text-decoration:none;color:var(--link);}.pdoc a:hover{color:var(--link-hover);}.pdoc blockquote{margin-left:2rem;}.pdoc pre{background-color:var(--code);border-top:1px solid var(--accent2);border-bottom:1px solid var(--accent2);margin-bottom:1em;padding:.5rem 0 .5rem .5rem;overflow-x:auto;}.pdoc code{color:var(--text);padding:.2em .4em;margin:0;font-size:85%;background-color:var(--code);border-radius:6px;}.pdoc a > code{color:inherit;}.pdoc pre > code{display:inline-block;font-size:inherit;background:none;border:none;padding:0;}.pdoc .modulename{margin-top:0;font-weight:bold;}.pdoc .modulename a{color:var(--link);transition:100ms all;}.pdoc .git-button{float:right;border:solid var(--link) 1px;}.pdoc .git-button:hover{background-color:var(--link);color:var(--pdoc-background);}.pdoc details{filter:opacity(1);}.pdoc details:not([open]){height:0;}.pdoc details > summary{position:absolute;top:-35px;right:0;font-size:.75rem;color:var(--muted);padding:0 .7em;user-select:none;}.pdoc details > summary:focus{outline:0;}.pdoc .docstring{margin-bottom:1.5rem;}.pdoc > section:first-of-type > .docstring{margin-bottom:2.5rem;}.pdoc .docstring pre{margin-left:1em;margin-right:1em;}.pdoc h1:target,.pdoc h2:target,.pdoc h3:target,.pdoc h4:target,.pdoc h5:target,.pdoc h6:target{background-color:var(--active);box-shadow:-1rem 0 0 0 var(--active);}.pdoc div:target > .attr,.pdoc section:target > .attr,.pdoc dd:target > a{background-color:var(--active);}.pdoc .attr:hover{filter:contrast(0.95);}.pdoc .headerlink{position:absolute;width:0;margin-left:-1.5rem;line-height:1.4rem;font-size:1.5rem;font-weight:normal;transition:all 100ms ease-in-out;opacity:0;user-select:none;}.pdoc .attr > .headerlink{margin-left:-2.5rem;}.pdoc *:hover > .headerlink,.pdoc *:target > .attr > .headerlink{opacity:1;}.pdoc .attr{display:block;color:var(--text);margin:.5rem 0 .5rem;padding:.4rem 5rem .4rem 1rem;background-color:var(--accent);}.pdoc .classattr{margin-left:2rem;}.pdoc .name{color:var(--name);font-weight:bold;}.pdoc .def{color:var(--def);font-weight:bold;}.pdoc .signature{white-space:pre-wrap;}.pdoc .annotation{color:var(--annotation);}.pdoc .inherited{margin-left:2rem;}.pdoc .inherited dt{font-weight:700;}.pdoc .inherited dt, .pdoc .inherited dd{display:inline;margin-left:0;margin-bottom:.5rem;}.pdoc .inherited dd:not(:last-child):after{content:", ";}.pdoc .inherited .class:before{content:"class ";}.pdoc .inherited .function a:after{content:"()";}.pdoc .search-result .docstring{overflow:auto;max-height:25vh;}.pdoc .search-result.focused > .attr{background-color:var(--active);}.pdoc .attribution{margin-top:2rem;display:block;opacity:0.5;transition:all 200ms;filter:grayscale(100%);}.pdoc .attribution:hover{opacity:1;filter:grayscale(0%);}.pdoc .attribution img{margin-left:5px;height:35px;vertical-align:middle;width:70px;transition:all 200ms;}.pdoc table{display:block;width:max-content;max-width:100%;overflow:auto;margin-bottom:1rem;}.pdoc table th{font-weight:600;}.pdoc table th, .pdoc table td{padding:6px 13px;border:1px solid var(--accent2);}</style>
 </head>
 <body>        <nav class="pdoc">
             <label id="navtoggle" for="togglestate" class="pdoc-button"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke-linecap='round' stroke="currentColor" stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg></label>
-            <input id="togglestate" type="checkbox">
+            <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
             <div>
                         <a class="pdoc-button module-list-button" href="../go_utils.html">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
@@ -89,13 +89,14 @@
             <summary>View Source</summary>
             <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
 
-<span class="k">def</span> <span class="nf">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gets the GLOBE Photo ID from a url</span>
 
@@ -104,28 +105,36 @@
 <span class="sd">    url : str</span>
 <span class="sd">      A url to a GLOBE Observer Image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">photo_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?&lt;=\d\d\d\d\/\d\d\/\d\d\/).*(?=\/)&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">photo_id</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">match_obj</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?&lt;=\d\d\d\d\/\d\d\/\d\d\/).*(?=\/)&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match_obj</span><span class="p">:</span>
+            <span class="n">photo_id</span> <span class="o">=</span> <span class="n">match_obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">photo_id</span>
+    <span class="k">return</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Removes erroneous characters from filenames. This includes the `/` character as this is assuming that the filename is being passed, not a path that may include that symbol as part of a directory.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    filename : str</span>
-<span class="sd">      A possible filename</span>
+<span class="sd">      A possible filename.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
 <span class="sd">        The filename without any erroneous characters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[&lt;&gt;:?</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\\</span><span class="s2">|*]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">download_photo</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">download_photo</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads a photo to a directory.</span>
 
@@ -138,11 +147,15 @@
 <span class="sd">    filename : str</span>
 <span class="sd">        The name of the photo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">downloaded_obj</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">downloaded_obj</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">]):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Either url (</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">), directory (</span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">), or filename (</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">) was None.&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">downloaded_obj</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">downloaded_obj</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">download_all_photos</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
@@ -154,16 +167,63 @@
 <span class="sd">    targets : list of tuple of str</span>
 <span class="sd">        Contains tuples that store the url, directory, and filename of the desired photos to be downloaded in that order.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
-        <span class="n">download_photo</span><span class="p">(</span><span class="o">*</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">expectedNumParams</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Targets was none&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="n">expectedNumParams</span><span class="p">:</span>
+                <span class="n">download_photo</span><span class="p">(</span><span class="o">*</span><span class="n">target</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target incorrectly formatted: </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_format_param_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_format_param_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">))</span>
         <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Photo&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="p">)</span>
+
+
+<span class="c1"># Constructs Photo Name using given included fields and additional information</span>
+<span class="k">def</span> <span class="nf">_build_photo_name</span><span class="p">(</span>
+    <span class="n">protocol</span><span class="p">,</span> <span class="n">photo_id</span><span class="p">,</span> <span class="n">name_fields</span><span class="p">,</span> <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span> <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="p">):</span>
+    <span class="n">valid_protocols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lc_&quot;</span><span class="p">,</span> <span class="s2">&quot;mhm_&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">protocol</span> <span class="ow">or</span> <span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_protocols</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Invalid protocol&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">protocol</span>
+    <span class="k">if</span> <span class="n">additional_name_stem</span> <span class="ow">and</span> <span class="n">additional_name_stem</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">additional_name_stem</span><span class="si">}</span><span class="s2">_&quot;</span>
+
+    <span class="k">if</span> <span class="n">include_in_name</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">include_in_name</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">name_fields</span><span class="p">):</span>
+                <span class="n">name</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name_fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="si">}</span><span class="s2">_&quot;</span>
+
+    <span class="n">name</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span>
+
+
+<span class="k">def</span> <span class="nf">_get_mosquito_classification</span><span class="p">(</span><span class="n">genus</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+    <span class="n">classification</span> <span class="o">=</span> <span class="n">genus</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">classification</span><span class="p">):</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">species</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">classification</span>
+
+
+<span class="k">def</span> <span class="nf">_warn_num_invalid_photos</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Skipped </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="si">}</span><span class="s2"> invalid photos: &quot;</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">get_mhm_download_targets</span><span class="p">(</span>
@@ -179,6 +239,8 @@
     <span class="n">larvae_photo</span><span class="o">=</span><span class="s2">&quot;mhm_LarvaFullBodyPhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">watersource_photo</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSourcePhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">abdomen_photo</span><span class="o">=</span><span class="s2">&quot;mhm_AbdomenCloseupPhotoUrls&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates mosquito habitat mapper targets to download</span>
@@ -209,6 +271,18 @@
 <span class="sd">        The column name of the column that contains the watersource photo urls. If not specified, the larvae photos will not be included.</span>
 <span class="sd">    abdomen_photo : str, default = &quot;mhm_AbdomenCloseupPhotoUrls&quot;</span>
 <span class="sd">        The column name of the column that contains the abdomen photo urls. If not specified, the larvae photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `url_type` -- Type of photo (e.g. Watersource, Larvae, Abdomen)</span>
+<span class="sd">            * `watersource` -- Watersource for the observed mosquito habitat</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `mhm_id` -- Unique ID for a MHM observation</span>
+<span class="sd">            * `classification` -- Mosquito classification (or `&quot;None&quot;` if no classification available)</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -217,6 +291,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">num_invalid_photos</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;invalid_URL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;rejected&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;pending&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;bad_photo_id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span>
         <span class="n">url_entry</span><span class="p">,</span>
@@ -234,19 +314,40 @@
 
         <span class="n">urls</span> <span class="o">=</span> <span class="n">url_entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
         <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;https&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-            <span class="n">classification</span> <span class="o">=</span> <span class="n">genus</span>
-            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">classification</span><span class="p">):</span>
-                <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
-            <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
-                <span class="n">classification</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">species</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;mhm_</span><span class="si">{</span><span class="n">url_type</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">watersource</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">mhm_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;https&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+                <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+                <span class="n">name_fields</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;url_type&quot;</span><span class="p">:</span> <span class="n">url_type</span><span class="p">,</span>
+                    <span class="s2">&quot;watersource&quot;</span><span class="p">:</span> <span class="n">watersource</span><span class="p">,</span>
+                    <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                    <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                    <span class="s2">&quot;date_str&quot;</span><span class="p">:</span> <span class="n">date_str</span><span class="p">,</span>
+                    <span class="s2">&quot;mhm_id&quot;</span><span class="p">:</span> <span class="n">mhm_id</span><span class="p">,</span>
+                    <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="n">_get_mosquito_classification</span><span class="p">(</span><span class="n">genus</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span>
+                <span class="p">}</span>
+
+                <span class="c1"># Checks photo_id is valid</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">protocol</span> <span class="o">=</span> <span class="s2">&quot;mhm_&quot;</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">_build_photo_name</span><span class="p">(</span>
+                        <span class="n">protocol</span><span class="p">,</span>
+                        <span class="n">photo_id</span><span class="p">,</span>
+                        <span class="n">name_fields</span><span class="p">,</span>
+                        <span class="n">include_in_name</span><span class="p">,</span>
+                        <span class="n">additional_name_stem</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;bad_photo_id&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;rejected&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;rejected&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;pending&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;pending&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;invalid_URL&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">photo_locations</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;photo&quot;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">}</span>
     <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">photo_locations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -263,6 +364,7 @@
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">genus_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">species_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">if</span> <span class="n">species_col</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="p">)</span>
+    <span class="n">_warn_num_invalid_photos</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">targets</span>
 
 
@@ -279,6 +381,8 @@
     <span class="n">larvae_photo</span><span class="o">=</span><span class="s2">&quot;mhm_LarvaFullBodyPhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">watersource_photo</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSourcePhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">abdomen_photo</span><span class="o">=</span><span class="s2">&quot;mhm_AbdomenCloseupPhotoUrls&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads mosquito habitat mapper photos</span>
@@ -309,6 +413,18 @@
 <span class="sd">        The column name of the column that contains the watersource photo urls. If not specified, the larvae photos will not be included.</span>
 <span class="sd">    abdomen_photo : str, default = &quot;mhm_AbdomenCloseupPhotoUrls&quot;</span>
 <span class="sd">        The column name of the column that contains the abdomen photo urls. If not specified, the larvae photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name list of column names to include into the downloaded photo names</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `url_type` -- Type of photo (e.g. Watersource, Larvae, Abdomen)</span>
+<span class="sd">            * `watersource` -- Watersource for the observed mosquito habitat</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `mhm_id` -- Unique ID for a MHM observation</span>
+<span class="sd">            * `classification` -- Mosquito classification (or `&quot;None&quot;` if no classification available)</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -335,6 +451,8 @@
     <span class="n">south_photo</span><span class="o">=</span><span class="s2">&quot;lc_SouthPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">east_photo</span><span class="o">=</span><span class="s2">&quot;lc_EastPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">west_photo</span><span class="o">=</span><span class="s2">&quot;lc_WestPhotoUrl&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates landcover targets to download</span>
@@ -365,6 +483,16 @@
 <span class="sd">        The column name of the column that contains the east photo urls. If not specified, these photos will not be included.</span>
 <span class="sd">    west_photo : str, default = &quot;lc_WestPhotoUrl&quot;</span>
 <span class="sd">        The column name of the column that contains the west photo urls. If not specified, these photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `direction` -- Direction where the photo was taken (e.g. North, South, East, West, Up, Down)</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `lc_id` -- Unique ID for a LC observation</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -373,17 +501,44 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">num_invalid_photos</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;invalid_URL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;rejected&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;pending&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;bad_photo_id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">lc_id</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;https&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
-            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;https&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+            <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-        <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="n">name_fields</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;direction&quot;</span><span class="p">:</span> <span class="n">direction</span><span class="p">,</span>
+                <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                <span class="s2">&quot;date_str&quot;</span><span class="p">:</span> <span class="n">date_str</span><span class="p">,</span>
+                <span class="s2">&quot;lc_id&quot;</span><span class="p">:</span> <span class="n">lc_id</span><span class="p">,</span>
+            <span class="p">}</span>
 
-        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lc_</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">lc_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">protocol</span> <span class="o">=</span> <span class="s2">&quot;lc_&quot;</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">_build_photo_name</span><span class="p">(</span>
+                    <span class="n">protocol</span><span class="p">,</span>
+                    <span class="n">photo_id</span><span class="p">,</span>
+                    <span class="n">name_fields</span><span class="p">,</span>
+                    <span class="n">include_in_name</span><span class="p">,</span>
+                    <span class="n">additional_name_stem</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;bad_photo_id&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;rejected&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+            <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;rejected&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;pending&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+            <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;pending&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;invalid_URL&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">photo_locations</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;photo&quot;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">}</span>
     <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">photo_locations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -397,7 +552,7 @@
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">date_col</span><span class="p">],</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
             <span class="p">)</span>
-
+    <span class="n">_warn_num_invalid_photos</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">targets</span>
 
 
@@ -414,6 +569,8 @@
     <span class="n">south_photo</span><span class="o">=</span><span class="s2">&quot;lc_SouthPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">east_photo</span><span class="o">=</span><span class="s2">&quot;lc_EastPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">west_photo</span><span class="o">=</span><span class="s2">&quot;lc_WestPhotoUrl&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads Landcover photos for landcover data.</span>
@@ -444,6 +601,16 @@
 <span class="sd">        The column name of the column that contains the east photo urls. If not specified, these photos will not be included.</span>
 <span class="sd">    west_photo : str, default = &quot;lc_WestPhotoUrl&quot;</span>
 <span class="sd">        The column name of the column that contains the west photo urls. If not specified, these photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `direction` -- Direction where the photo was taken (e.g. North, South, East, West, Up, Down)</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `lc_id` -- Unique ID for a LC observation</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -466,12 +633,12 @@
 
         
             <span class="def">def</span>
-            <span class="name">get_globe_photo_id</span><span class="signature">(url)</span>:
+            <span class="name">get_globe_photo_id</span><span class="signature">(url: str)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gets the GLOBE Photo ID from a url</span>
 
@@ -480,8 +647,14 @@
 <span class="sd">    url : str</span>
 <span class="sd">      A url to a GLOBE Observer Image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">photo_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?&lt;=\d\d\d\d\/\d\d\/\d\d\/).*(?=\/)&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">photo_id</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">match_obj</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?&lt;=\d\d\d\d\/\d\d\/\d\d\/).*(?=\/)&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match_obj</span><span class="p">:</span>
+            <span class="n">photo_id</span> <span class="o">=</span> <span class="n">match_obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">photo_id</span>
+    <span class="k">return</span> <span class="kc">None</span>
 </pre></div>
 
         </details>
@@ -503,25 +676,27 @@ A url to a GLOBE Observer Image</li>
 
         
             <span class="def">def</span>
-            <span class="name">remove_bad_characters</span><span class="signature">(filename)</span>:
+            <span class="name">remove_bad_characters</span><span class="signature">(filename: str)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Removes erroneous characters from filenames. This includes the `/` character as this is assuming that the filename is being passed, not a path that may include that symbol as part of a directory.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    filename : str</span>
-<span class="sd">      A possible filename</span>
+<span class="sd">      A possible filename.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
 <span class="sd">        The filename without any erroneous characters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[&lt;&gt;:?</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\\</span><span class="s2">|*]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </pre></div>
 
@@ -533,7 +708,7 @@ A url to a GLOBE Observer Image</li>
 
 <ul>
 <li><strong>filename</strong> (str):
-A possible filename</li>
+A possible filename.</li>
 </ul>
 
 <h6 id="returns">Returns</h6>
@@ -550,12 +725,12 @@ A possible filename</li>
 
         
             <span class="def">def</span>
-            <span class="name">download_photo</span><span class="signature">(url, directory, filename)</span>:
+            <span class="name">download_photo</span><span class="signature">(url: str, directory: str, filename: str)</span>:
     </div>
 
                 <details>
             <summary>View Source</summary>
-            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">download_photo</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+            <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">download_photo</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads a photo to a directory.</span>
 
@@ -568,11 +743,15 @@ A possible filename</li>
 <span class="sd">    filename : str</span>
 <span class="sd">        The name of the photo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">downloaded_obj</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">downloaded_obj</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">]):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Either url (</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">), directory (</span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">), or filename (</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">) was None.&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">downloaded_obj</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">downloaded_obj</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </pre></div>
 
         </details>
@@ -612,8 +791,15 @@ The name of the photo</li>
 <span class="sd">    targets : list of tuple of str</span>
 <span class="sd">        Contains tuples that store the url, directory, and filename of the desired photos to be downloaded in that order.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
-        <span class="n">download_photo</span><span class="p">(</span><span class="o">*</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">expectedNumParams</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Targets was none&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="n">expectedNumParams</span><span class="p">:</span>
+                <span class="n">download_photo</span><span class="p">(</span><span class="o">*</span><span class="n">target</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target incorrectly formatted: </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
         </details>
@@ -647,7 +833,9 @@ Contains tuples that store the url, directory, and filename of the desired photo
     species_col=&#39;mhm_Species&#39;,
     larvae_photo=&#39;mhm_LarvaFullBodyPhotoUrls&#39;,
     watersource_photo=&#39;mhm_WaterSourcePhotoUrls&#39;,
-    abdomen_photo=&#39;mhm_AbdomenCloseupPhotoUrls&#39;
+    abdomen_photo=&#39;mhm_AbdomenCloseupPhotoUrls&#39;,
+    include_in_name=[],
+    additional_name_stem=&#39;&#39;
 )</span>:
     </div>
 
@@ -666,6 +854,8 @@ Contains tuples that store the url, directory, and filename of the desired photo
     <span class="n">larvae_photo</span><span class="o">=</span><span class="s2">&quot;mhm_LarvaFullBodyPhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">watersource_photo</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSourcePhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">abdomen_photo</span><span class="o">=</span><span class="s2">&quot;mhm_AbdomenCloseupPhotoUrls&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates mosquito habitat mapper targets to download</span>
@@ -696,6 +886,18 @@ Contains tuples that store the url, directory, and filename of the desired photo
 <span class="sd">        The column name of the column that contains the watersource photo urls. If not specified, the larvae photos will not be included.</span>
 <span class="sd">    abdomen_photo : str, default = &quot;mhm_AbdomenCloseupPhotoUrls&quot;</span>
 <span class="sd">        The column name of the column that contains the abdomen photo urls. If not specified, the larvae photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `url_type` -- Type of photo (e.g. Watersource, Larvae, Abdomen)</span>
+<span class="sd">            * `watersource` -- Watersource for the observed mosquito habitat</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `mhm_id` -- Unique ID for a MHM observation</span>
+<span class="sd">            * `classification` -- Mosquito classification (or `&quot;None&quot;` if no classification available)</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -704,6 +906,12 @@ Contains tuples that store the url, directory, and filename of the desired photo
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">num_invalid_photos</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;invalid_URL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;rejected&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;pending&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;bad_photo_id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span>
         <span class="n">url_entry</span><span class="p">,</span>
@@ -721,19 +929,40 @@ Contains tuples that store the url, directory, and filename of the desired photo
 
         <span class="n">urls</span> <span class="o">=</span> <span class="n">url_entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
         <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;https&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-            <span class="n">classification</span> <span class="o">=</span> <span class="n">genus</span>
-            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">classification</span><span class="p">):</span>
-                <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
-            <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
-                <span class="n">classification</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">species</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;mhm_</span><span class="si">{</span><span class="n">url_type</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">watersource</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">mhm_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;https&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+                <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+                <span class="n">name_fields</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;url_type&quot;</span><span class="p">:</span> <span class="n">url_type</span><span class="p">,</span>
+                    <span class="s2">&quot;watersource&quot;</span><span class="p">:</span> <span class="n">watersource</span><span class="p">,</span>
+                    <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                    <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                    <span class="s2">&quot;date_str&quot;</span><span class="p">:</span> <span class="n">date_str</span><span class="p">,</span>
+                    <span class="s2">&quot;mhm_id&quot;</span><span class="p">:</span> <span class="n">mhm_id</span><span class="p">,</span>
+                    <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="n">_get_mosquito_classification</span><span class="p">(</span><span class="n">genus</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span>
+                <span class="p">}</span>
+
+                <span class="c1"># Checks photo_id is valid</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">protocol</span> <span class="o">=</span> <span class="s2">&quot;mhm_&quot;</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">_build_photo_name</span><span class="p">(</span>
+                        <span class="n">protocol</span><span class="p">,</span>
+                        <span class="n">photo_id</span><span class="p">,</span>
+                        <span class="n">name_fields</span><span class="p">,</span>
+                        <span class="n">include_in_name</span><span class="p">,</span>
+                        <span class="n">additional_name_stem</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;bad_photo_id&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;rejected&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;rejected&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;pending&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;pending&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;invalid_URL&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">photo_locations</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;photo&quot;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">}</span>
     <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">photo_locations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -750,6 +979,7 @@ Contains tuples that store the url, directory, and filename of the desired photo
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">genus_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                 <span class="n">mhm_df</span><span class="p">[</span><span class="n">species_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">if</span> <span class="n">species_col</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="p">)</span>
+    <span class="n">_warn_num_invalid_photos</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">targets</span>
 </pre></div>
 
@@ -784,6 +1014,20 @@ The column name of the column that contains the larvae photo urls. If not specif
 The column name of the column that contains the watersource photo urls. If not specified, the larvae photos will not be included.</li>
 <li><strong>abdomen_photo</strong> (str, default = "mhm_AbdomenCloseupPhotoUrls"):
 The column name of the column that contains the abdomen photo urls. If not specified, the larvae photos will not be included.</li>
+<li><strong>include_in_name</strong> (list of str, default=[]):
+A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name
+Accepted Included Names include:
+<ul>
+<li><code>url_type</code> -- Type of photo (e.g. Watersource, Larvae, Abdomen)</li>
+<li><code>watersource</code> -- Watersource for the observed mosquito habitat</li>
+<li><code>latitude</code> -- GPS Latitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>longitude</code> -- GPS Longitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>date_str</code> -- Date Range expressed as a String</li>
+<li><code>mhm_id</code> -- Unique ID for a MHM observation</li>
+<li><code>classification</code> -- Mosquito classification (or <code>"None"</code> if no classification available)</li>
+</ul></li>
+<li><strong>additional_name_stem</strong> (str, default=""):
+Additional custom information the user can add to the name.</li>
 </ul>
 
 <h6 id="returns">Returns</h6>
@@ -812,7 +1056,9 @@ The column name of the column that contains the abdomen photo urls. If not speci
     species_col=&#39;mhm_Species&#39;,
     larvae_photo=&#39;mhm_LarvaFullBodyPhotoUrls&#39;,
     watersource_photo=&#39;mhm_WaterSourcePhotoUrls&#39;,
-    abdomen_photo=&#39;mhm_AbdomenCloseupPhotoUrls&#39;
+    abdomen_photo=&#39;mhm_AbdomenCloseupPhotoUrls&#39;,
+    include_in_name=[],
+    additional_name_stem=&#39;&#39;
 )</span>:
     </div>
 
@@ -831,6 +1077,8 @@ The column name of the column that contains the abdomen photo urls. If not speci
     <span class="n">larvae_photo</span><span class="o">=</span><span class="s2">&quot;mhm_LarvaFullBodyPhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">watersource_photo</span><span class="o">=</span><span class="s2">&quot;mhm_WaterSourcePhotoUrls&quot;</span><span class="p">,</span>
     <span class="n">abdomen_photo</span><span class="o">=</span><span class="s2">&quot;mhm_AbdomenCloseupPhotoUrls&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads mosquito habitat mapper photos</span>
@@ -861,6 +1109,18 @@ The column name of the column that contains the abdomen photo urls. If not speci
 <span class="sd">        The column name of the column that contains the watersource photo urls. If not specified, the larvae photos will not be included.</span>
 <span class="sd">    abdomen_photo : str, default = &quot;mhm_AbdomenCloseupPhotoUrls&quot;</span>
 <span class="sd">        The column name of the column that contains the abdomen photo urls. If not specified, the larvae photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name list of column names to include into the downloaded photo names</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `url_type` -- Type of photo (e.g. Watersource, Larvae, Abdomen)</span>
+<span class="sd">            * `watersource` -- Watersource for the observed mosquito habitat</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `mhm_id` -- Unique ID for a MHM observation</span>
+<span class="sd">            * `classification` -- Mosquito classification (or `&quot;None&quot;` if no classification available)</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -905,6 +1165,20 @@ The column name of the column that contains the larvae photo urls. If not specif
 The column name of the column that contains the watersource photo urls. If not specified, the larvae photos will not be included.</li>
 <li><strong>abdomen_photo</strong> (str, default = "mhm_AbdomenCloseupPhotoUrls"):
 The column name of the column that contains the abdomen photo urls. If not specified, the larvae photos will not be included.</li>
+<li><strong>include_in_name</strong> (list of str, default=[]):
+A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name list of column names to include into the downloaded photo names
+Accepted Included Names include:
+<ul>
+<li><code>url_type</code> -- Type of photo (e.g. Watersource, Larvae, Abdomen)</li>
+<li><code>watersource</code> -- Watersource for the observed mosquito habitat</li>
+<li><code>latitude</code> -- GPS Latitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>longitude</code> -- GPS Longitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>date_str</code> -- Date Range expressed as a String</li>
+<li><code>mhm_id</code> -- Unique ID for a MHM observation</li>
+<li><code>classification</code> -- Mosquito classification (or <code>"None"</code> if no classification available)</li>
+</ul></li>
+<li><strong>additional_name_stem</strong> (str, default=""):
+Additional custom information the user can add to the name.</li>
 </ul>
 
 <h6 id="returns">Returns</h6>
@@ -933,7 +1207,9 @@ The column name of the column that contains the abdomen photo urls. If not speci
     north_photo=&#39;lc_NorthPhotoUrl&#39;,
     south_photo=&#39;lc_SouthPhotoUrl&#39;,
     east_photo=&#39;lc_EastPhotoUrl&#39;,
-    west_photo=&#39;lc_WestPhotoUrl&#39;
+    west_photo=&#39;lc_WestPhotoUrl&#39;,
+    include_in_name=[],
+    additional_name_stem=&#39;&#39;
 )</span>:
     </div>
 
@@ -952,6 +1228,8 @@ The column name of the column that contains the abdomen photo urls. If not speci
     <span class="n">south_photo</span><span class="o">=</span><span class="s2">&quot;lc_SouthPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">east_photo</span><span class="o">=</span><span class="s2">&quot;lc_EastPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">west_photo</span><span class="o">=</span><span class="s2">&quot;lc_WestPhotoUrl&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates landcover targets to download</span>
@@ -982,6 +1260,16 @@ The column name of the column that contains the abdomen photo urls. If not speci
 <span class="sd">        The column name of the column that contains the east photo urls. If not specified, these photos will not be included.</span>
 <span class="sd">    west_photo : str, default = &quot;lc_WestPhotoUrl&quot;</span>
 <span class="sd">        The column name of the column that contains the west photo urls. If not specified, these photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `direction` -- Direction where the photo was taken (e.g. North, South, East, West, Up, Down)</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `lc_id` -- Unique ID for a LC observation</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -990,17 +1278,44 @@ The column name of the column that contains the abdomen photo urls. If not speci
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">arguments</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
     <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">num_invalid_photos</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;invalid_URL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;rejected&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;pending&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;bad_photo_id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">get_photo_args</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">lc_id</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;https&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
-            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;https&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+            <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-        <span class="n">date_str</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">photo_id</span> <span class="o">=</span> <span class="n">get_globe_photo_id</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="n">name_fields</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;direction&quot;</span><span class="p">:</span> <span class="n">direction</span><span class="p">,</span>
+                <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                <span class="s2">&quot;date_str&quot;</span><span class="p">:</span> <span class="n">date_str</span><span class="p">,</span>
+                <span class="s2">&quot;lc_id&quot;</span><span class="p">:</span> <span class="n">lc_id</span><span class="p">,</span>
+            <span class="p">}</span>
 
-        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lc_</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">lc_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">photo_id</span><span class="si">}</span><span class="s2">.png&quot;</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">remove_bad_characters</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">photo_id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">protocol</span> <span class="o">=</span> <span class="s2">&quot;lc_&quot;</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">_build_photo_name</span><span class="p">(</span>
+                    <span class="n">protocol</span><span class="p">,</span>
+                    <span class="n">photo_id</span><span class="p">,</span>
+                    <span class="n">name_fields</span><span class="p">,</span>
+                    <span class="n">include_in_name</span><span class="p">,</span>
+                    <span class="n">additional_name_stem</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;bad_photo_id&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;rejected&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+            <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;rejected&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;pending&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+            <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;pending&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">num_invalid_photos</span><span class="p">[</span><span class="s2">&quot;invalid_URL&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">photo_locations</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;photo&quot;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">}</span>
     <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">photo_locations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1014,7 +1329,7 @@ The column name of the column that contains the abdomen photo urls. If not speci
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">date_col</span><span class="p">],</span>
                 <span class="n">lc_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
             <span class="p">)</span>
-
+    <span class="n">_warn_num_invalid_photos</span><span class="p">(</span><span class="n">num_invalid_photos</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">targets</span>
 </pre></div>
 
@@ -1049,6 +1364,18 @@ The column name of the column that contains the south photo urls. If not specifi
 The column name of the column that contains the east photo urls. If not specified, these photos will not be included.</li>
 <li><strong>west_photo</strong> (str, default = "lc_WestPhotoUrl"):
 The column name of the column that contains the west photo urls. If not specified, these photos will not be included.</li>
+<li><strong>include_in_name</strong> (list of str, default=[]):
+A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name
+Accepted Included Names include:
+<ul>
+<li><code>direction</code> -- Direction where the photo was taken (e.g. North, South, East, West, Up, Down)</li>
+<li><code>latitude</code> -- GPS Latitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>longitude</code> -- GPS Longitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>date_str</code> -- Date Range expressed as a String</li>
+<li><code>lc_id</code> -- Unique ID for a LC observation</li>
+</ul></li>
+<li><strong>additional_name_stem</strong> (str, default=""):
+Additional custom information the user can add to the name.</li>
 </ul>
 
 <h6 id="returns">Returns</h6>
@@ -1077,7 +1404,9 @@ The column name of the column that contains the west photo urls. If not specifie
     north_photo=&#39;lc_NorthPhotoUrl&#39;,
     south_photo=&#39;lc_SouthPhotoUrl&#39;,
     east_photo=&#39;lc_EastPhotoUrl&#39;,
-    west_photo=&#39;lc_WestPhotoUrl&#39;
+    west_photo=&#39;lc_WestPhotoUrl&#39;,
+    include_in_name=[],
+    additional_name_stem=&#39;&#39;
 )</span>:
     </div>
 
@@ -1096,6 +1425,8 @@ The column name of the column that contains the west photo urls. If not specifie
     <span class="n">south_photo</span><span class="o">=</span><span class="s2">&quot;lc_SouthPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">east_photo</span><span class="o">=</span><span class="s2">&quot;lc_EastPhotoUrl&quot;</span><span class="p">,</span>
     <span class="n">west_photo</span><span class="o">=</span><span class="s2">&quot;lc_WestPhotoUrl&quot;</span><span class="p">,</span>
+    <span class="n">include_in_name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">additional_name_stem</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Downloads Landcover photos for landcover data.</span>
@@ -1126,6 +1457,16 @@ The column name of the column that contains the west photo urls. If not specifie
 <span class="sd">        The column name of the column that contains the east photo urls. If not specified, these photos will not be included.</span>
 <span class="sd">    west_photo : str, default = &quot;lc_WestPhotoUrl&quot;</span>
 <span class="sd">        The column name of the column that contains the west photo urls. If not specified, these photos will not be included.</span>
+<span class="sd">    include_in_name : list of str, default=[]</span>
+<span class="sd">        A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name</span>
+<span class="sd">        Accepted Included Names include:</span>
+<span class="sd">            * `direction` -- Direction where the photo was taken (e.g. North, South, East, West, Up, Down)</span>
+<span class="sd">            * `latitude` -- GPS Latitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `longitude` -- GPS Longitude Coordinate (rounded to 5 decimal places)</span>
+<span class="sd">            * `date_str` -- Date Range expressed as a String</span>
+<span class="sd">            * `lc_id` -- Unique ID for a LC observation</span>
+<span class="sd">    additional_name_stem : str, default=&quot;&quot;</span>
+<span class="sd">        Additional custom information the user can add to the name.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1171,6 +1512,18 @@ The column name of the column that contains the south photo urls. If not specifi
 The column name of the column that contains the east photo urls. If not specified, these photos will not be included.</li>
 <li><strong>west_photo</strong> (str, default = "lc_WestPhotoUrl"):
 The column name of the column that contains the west photo urls. If not specified, these photos will not be included.</li>
+<li><strong>include_in_name</strong> (list of str, default=[]):
+A list of column names to include into the downloaded photo names. The order of items in this list is maintained in the outputted name
+Accepted Included Names include:
+<ul>
+<li><code>direction</code> -- Direction where the photo was taken (e.g. North, South, East, West, Up, Down)</li>
+<li><code>latitude</code> -- GPS Latitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>longitude</code> -- GPS Longitude Coordinate (rounded to 5 decimal places)</li>
+<li><code>date_str</code> -- Date Range expressed as a String</li>
+<li><code>lc_id</code> -- Unique ID for a LC observation</li>
+</ul></li>
+<li><strong>additional_name_stem</strong> (str, default=""):
+Additional custom information the user can add to the name.</li>
 </ul>
 
 <h6 id="returns">Returns</h6>
@@ -1285,10 +1638,20 @@ The column name of the column that contains the west photo urls. If not specifie
                 let heading;
                 switch (result.doc.type) {
                     case "function":
-                        heading = `<span class="def">${doc.funcdef}</span> <span class="name">${doc.fullname}</span><span class="signature">(${doc.parameters.join(", ")})</span>`;
+                        heading = `<span class="def">${doc.funcdef}</span> <span class="name">${doc.fullname}</span><span class="signature">${doc.signature}:</span>`;
                         break;
                     case "class":
                         heading = `<span class="def">class</span> <span class="name">${doc.fullname}</span>`;
+                        if (doc.bases)
+                            heading += `<wbr>(<span class="base">${doc.bases}</span>)`;
+                        heading += `:`;
+                        break;
+                    case "variable":
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        if (doc.annotation)
+                            heading += `<span class="annotation">${doc.annotation}</span>`;
+                        if (doc.default_value)
+                            heading += `<span class="default_value">${doc.default_value}</span>`;
                         break;
                     default:
                         heading = `<span class="name">${doc.fullname}</span>`;
