@@ -153,17 +153,14 @@
     <span class="k">if</span> <span class="n">is_clean</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
 
+    <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+        <span class="n">countries</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
+    <span class="n">countries_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
     <span class="c1"># Return the regular data if nothing is specified</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">countries</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">regions</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">countries_set</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">df</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">countries</span><span class="p">:</span>
-            <span class="n">mask</span> <span class="o">|=</span> <span class="n">_get_valid_countries_mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">regions</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
-                <span class="n">mask</span> <span class="o">|=</span> <span class="n">_get_valid_countries_mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">_get_valid_countries_mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries_set</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
 
@@ -184,7 +181,7 @@
             <span class="name">get_country_api_data</span><span class="signature">(
     protocol,
     start_date=&#39;2017-05-31&#39;,
-    end_date=&#39;2022-01-28&#39;,
+    end_date=&#39;2022-02-09&#39;,
     is_clean=True,
     countries=[],
     regions=[]
@@ -263,17 +260,14 @@
     <span class="k">if</span> <span class="n">is_clean</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">default_data_clean</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
 
+    <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+        <span class="n">countries</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
+    <span class="n">countries_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
     <span class="c1"># Return the regular data if nothing is specified</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">countries</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">regions</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">countries_set</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">df</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">countries</span><span class="p">:</span>
-            <span class="n">mask</span> <span class="o">|=</span> <span class="n">_get_valid_countries_mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">regions</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
-                <span class="n">mask</span> <span class="o">|=</span> <span class="n">_get_valid_countries_mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">region_dict</span><span class="p">[</span><span class="n">region</span><span class="p">])</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">_get_valid_countries_mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">countries_set</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 </pre></div>
 
